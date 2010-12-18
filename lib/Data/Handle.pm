@@ -2,108 +2,24 @@ use strict;
 use warnings;
 
 package Data::Handle;
+BEGIN {
+  $Data::Handle::VERSION = '0.01011322';
+}
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
 
 use Package::Stash;
 require Carp;
 
-=head1 SYNOPSIS
-
-    package Foo;
-
-    sub bar {
-        my $handle = Data::Handle->new( __PACKAGE__ );
-        while (<$handle>) {
-            print $_;
-        }
-    }
-
-    __DATA__
-    Foo
-
-=cut
-
-=head1 DESCRIPTION
-
-This Package serves as a very I<very> simple interface to a packages __DATA__ section.
-
-Its primary purposes is to make successive accesses viable without needing to
-scan the file manually for the __DATA__ marker.
-
-It does this mostly by recording the current position of the file handle on
-the first call to C<< ->new >>, and then re-using that position on every successive C<< ->new >> call,
-which eliminates a bit of the logic for you.
-
-At present, it only does a simple heuristic ( backtracking ) to verify the current position is B<immediately>
-at the start of a __DATA__ section, but we may improve on this one day.
-
-=cut
-
-=head1 WARNING
-
-At present, this module does you no favours if something else earlier has moved the file handle position past
-the __DATA__ section, or rewound it to the start of the file. This is an understood caveat, but nothing else
-seems to have a good way around this either. ( You can always rewind to the start of the file and use heuristics, but that is rather pesky ).
-
-Hopefully, if other people B<do> decide to go moving your file pointer, they'll use this module to do it so
-you your code doesn't break.
-
-=cut
-
-=head1 USAGE
-
-C<Data::Handle->new()> returns a tied file-handle, and for all intents and purposes, it should
-behave as if somebody had copied __DATA__ to its own file, and then done C<< open $fh, '<' , $file >>
-on it, for every instance of the Data::Handle.
-
-It also inherits from L<IO::File>, so all the methods it has that make sense to use should probably work
-on this too,  i.e.:
-
-    my $handle = Data::Handle->new( __PACKAGE__ );
-    my @lines = $handle->getlines();
 
 
-Also, all offsets are proxied in transit, so you can treat the file-handle as if byte 0 is the first byte of the data section.
 
-    my $handle = Data::Handle->new( __PACKAGE__ );
-    my @lines = $handle->getlines();
-    seek $handle, 0, 0;
-    local $/ = undef;
-    my $line = scalar <$handle>; # SLURPED!
-
-Also, the current position of each handle instance is internally tracked, so you can have as many
-objects pointing to the same __DATA__ section but have their read mechanism uninterrupted by any others.
-
-    my $handlea  = Data::Handle->new( __PACKAGE__ );
-    my $handleb  = Data::Handle->new( __PACKAGE__ );
-
-    seek $handlea, 10, 0;
-    seek $handleb, 15, 0;
-
-    read $handlea, my $buf, 5;
-
-    read $handleb, my $bufa, 1;
-    read $handleb, my $bufb, 1;
-
-     $bufa eq $bufb;
-
-Don't be fooled, it does this under the covers by a lot of C<seek>/C<tell> magic, but they shouldn't be a problem unless you are truly anal over speed.
-
-=cut
 
 my %datastash;
 use Symbol qw( gensym );
 use Scalar::Util qw( weaken );
 use parent qw( IO::File );
 
-=method new
-
-    my $fh = Data::Handle->new( $targetpackage )
-
-Where C<$targetpackage> is the package you want the __DATA__ section from.
-
-=cut
 
 
 sub new {
@@ -355,12 +271,119 @@ sub _write {
 
 }
 
+1;
+
+
+__END__
+=pod
+
+=head1 NAME
+
+Data::Handle - A Very simple interface to the __DATA__  file handle.
+
+=head1 VERSION
+
+version 0.01011322
+
+=head1 SYNOPSIS
+
+    package Foo;
+
+    sub bar {
+        my $handle = Data::Handle->new( __PACKAGE__ );
+        while (<$handle>) {
+            print $_;
+        }
+    }
+
+    __DATA__
+    Foo
+
+=head1 DESCRIPTION
+
+This Package serves as a very I<very> simple interface to a packages __DATA__ section.
+
+Its primary purposes is to make successive accesses viable without needing to
+scan the file manually for the __DATA__ marker.
+
+It does this mostly by recording the current position of the file handle on
+the first call to C<< ->new >>, and then re-using that position on every successive C<< ->new >> call,
+which eliminates a bit of the logic for you.
+
+At present, it only does a simple heuristic ( backtracking ) to verify the current position is B<immediately>
+at the start of a __DATA__ section, but we may improve on this one day.
+
+=head1 METHODS
+
+=head2 new
+
+    my $fh = Data::Handle->new( $targetpackage )
+
+Where C<$targetpackage> is the package you want the __DATA__ section from.
+
+=head1 WARNING
+
+At present, this module does you no favours if something else earlier has moved the file handle position past
+the __DATA__ section, or rewound it to the start of the file. This is an understood caveat, but nothing else
+seems to have a good way around this either. ( You can always rewind to the start of the file and use heuristics, but that is rather pesky ).
+
+Hopefully, if other people B<do> decide to go moving your file pointer, they'll use this module to do it so
+you your code doesn't break.
+
+=head1 USAGE
+
+C<Data::Handle->new()> returns a tied file-handle, and for all intents and purposes, it should
+behave as if somebody had copied __DATA__ to its own file, and then done C<< open $fh, '<' , $file >>
+on it, for every instance of the Data::Handle.
+
+It also inherits from L<IO::File>, so all the methods it has that make sense to use should probably work
+on this too,  i.e.:
+
+    my $handle = Data::Handle->new( __PACKAGE__ );
+    my @lines = $handle->getlines();
+
+Also, all offsets are proxied in transit, so you can treat the file-handle as if byte 0 is the first byte of the data section.
+
+    my $handle = Data::Handle->new( __PACKAGE__ );
+    my @lines = $handle->getlines();
+    seek $handle, 0, 0;
+    local $/ = undef;
+    my $line = scalar <$handle>; # SLURPED!
+
+Also, the current position of each handle instance is internally tracked, so you can have as many
+objects pointing to the same __DATA__ section but have their read mechanism uninterrupted by any others.
+
+    my $handlea  = Data::Handle->new( __PACKAGE__ );
+    my $handleb  = Data::Handle->new( __PACKAGE__ );
+
+    seek $handlea, 10, 0;
+    seek $handleb, 15, 0;
+
+    read $handlea, my $buf, 5;
+
+    read $handleb, my $bufa, 1;
+    read $handleb, my $bufb, 1;
+
+     $bufa eq $bufb;
+
+Don't be fooled, it does this under the covers by a lot of C<seek>/C<tell> magic, but they shouldn't be a problem unless you are truly anal over speed.
+
 =head1 CREDITS
 
 Thanks to LeoNerd and anno, from #perl on irc.freenode.org,
 they were most helpful in helping me grok the magic of C<tie> that
 makes the simplicity of the interface possible.
 
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-1;
 

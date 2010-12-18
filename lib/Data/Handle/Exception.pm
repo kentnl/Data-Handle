@@ -2,44 +2,19 @@ use strict;
 use warnings;
 
 package Data::Handle::Exception;
+BEGIN {
+  $Data::Handle::Exception::VERSION = '0.01011322';
+}
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
 
-=head1 SYNOPSIS
 
-    use Data::Handle::Exception;
-    Data::Handle::Exception->generate_exception(
-        'Foo::Bar' => 'A Bar error occurred :('
-    )->throw();
-
-=cut
-
-=head1 DESCRIPTION
-
-L<Data::Handle>'s primary goal is to be somewhat "Infrastructural" in design, much like L<Package::Stash> is, being very low-level, and doing one thing, and doing it well, solving an issue with Perl's native implementation.
-
-The idea is for more complex things to use this, instead of this using more complex things.
-
-As such, a dependency on something like Moose would be overkill, possibly even detrimental to encouraging the use of this module.
-
-So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a really really nasty but reasonably straight forward exception class.
-
-The actual Exception classes don't actually exist, they're automatically vivified when they're needed.
-And we have some really nasty stack-trace collection support.
-
-=cut
 
 use overload '""' => sub {
   my $self = shift;
   return $self->{message} . "\n\n" . ( join qq{\n}, @{ $self->{stack} } ) . "\n\n";
 };
 
-=method new
-
-    my @stack;
-    my $i = Data::Handle::Exception->new(  $messageString, \@stack );
-
-=cut
 
 sub new {
   my ( $class, $message, $stack ) = @_;
@@ -50,11 +25,6 @@ sub new {
   return $self;
 }
 
-=method throw
-
-    Data::Handle::Exception->new(  $messageString, \@stack )->throw();
-
-=cut
 
 sub throw {
   my $self = shift;
@@ -75,26 +45,6 @@ sub _gen {
   return 1;
 }
 
-=method generate_exception
-
-    my $i = Data::Handle::Exception->generate_exception(
-        'Foo::Bar' => 'SomeMessage'
-    );
-
-    # $i isa Data::Handle::Exception::Foo::Bar
-    # Data::Handle::Exception::Foo::Bar isa
-    #    Data::Handle::Exception::Foo
-    #
-    # Data::Handle::Exception::Foo isa
-    #   Data::Handle::Exception
-    #
-    # $i has a message and a stack-trace
-    #
-
-    $i->throw():
-
-
-=cut
 
 sub generate_exception {
   my ( $self, $class, $message ) = @_;
@@ -122,4 +72,78 @@ sub generate_exception {
 }
 
 1;
+
+
+__END__
+=pod
+
+=head1 NAME
+
+Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
+
+=head1 VERSION
+
+version 0.01011322
+
+=head1 SYNOPSIS
+
+    use Data::Handle::Exception;
+    Data::Handle::Exception->generate_exception(
+        'Foo::Bar' => 'A Bar error occurred :('
+    )->throw();
+
+=head1 DESCRIPTION
+
+L<Data::Handle>'s primary goal is to be somewhat "Infrastructural" in design, much like L<Package::Stash> is, being very low-level, and doing one thing, and doing it well, solving an issue with Perl's native implementation.
+
+The idea is for more complex things to use this, instead of this using more complex things.
+
+As such, a dependency on something like Moose would be overkill, possibly even detrimental to encouraging the use of this module.
+
+So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a really really nasty but reasonably straight forward exception class.
+
+The actual Exception classes don't actually exist, they're automatically vivified when they're needed.
+And we have some really nasty stack-trace collection support.
+
+=head1 METHODS
+
+=head2 new
+
+    my @stack;
+    my $i = Data::Handle::Exception->new(  $messageString, \@stack );
+
+=head2 throw
+
+    Data::Handle::Exception->new(  $messageString, \@stack )->throw();
+
+=head2 generate_exception
+
+    my $i = Data::Handle::Exception->generate_exception(
+        'Foo::Bar' => 'SomeMessage'
+    );
+
+    # $i isa Data::Handle::Exception::Foo::Bar
+    # Data::Handle::Exception::Foo::Bar isa
+    #    Data::Handle::Exception::Foo
+    #
+    # Data::Handle::Exception::Foo isa
+    #   Data::Handle::Exception
+    #
+    # $i has a message and a stack-trace
+    #
+
+    $i->throw():
+
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
 

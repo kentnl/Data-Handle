@@ -1,6 +1,4 @@
-Revision history for {{$dist->name}}
-
-{{$NEXT}}
+Revision history for Data-Handle
 
 0.01011322 2010-12-18 23:14:03 Pacific/Auckland
           First version.
