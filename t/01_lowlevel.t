@@ -2,25 +2,51 @@
 use strict;
 use warnings;
 use Test::More;
-
+use Test::Fatal;
 use Data::Handle;
 
 use lib 't/lib';
 use Data;
 
-my $handle = Data::Handle->new('Data');
+my $handle;
+my $e;
 
-#isnt( $handle, undef, 'Data:: has a DATA symbol' );
+is(
+  $e = exception {
+    $handle = Data::Handle->new('Data');
+  },
+  undef,
+  "->new on a valid package with an Data works"
+);
 
-diag( Data::Handle->_is_valid_data_tell('Data'));
-#my $fh = Data::Handle->_get_data_symbol('Data');
-#my $offset = Data::Handle->_get_start_offset('Data');
-#
-#diag( $offset );
-#binmode( $fh, ':raw' );
-#seek $fh, $offset - 9, 0;
-#diag( <$fh> );
-#seek $fh, $offset, 0 ;
-#diag( <$fh> );
+isnt(
+  $e = exception {
+    $handle = Data::Handle->new('Data_Not_There');
+  },
+  undef,
+  "->new on a valid package with an Data_Not_There asplodes"
+);
+
+isa_ok( $e, 'Data::Handle::Exception' );
+
+$handle = Data::Handle->new('Data');
+
+seek $handle, -9, 0;
+
+my $buffer;
+
+read $handle, $buffer, 8, 0;
+
+is( $buffer, '__DATA__', 'seek and read work properly on new instances' );
+
+is(
+  do {
+    $handle = Data::Handle->new('Data');
+    local $/ = undef;
+    scalar <$handle>;
+  },
+  qq{Hello World.\n\n\nThis is a test file.\n},
+  'Slurp contents works'
+);
 
 done_testing;

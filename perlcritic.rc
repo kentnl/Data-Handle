@@ -1,5 +1,5 @@
 severity = 1
-exclude = RequireTidyCode RequirePodSections ProhibitPostfixControls RequireRcsKeywords RequireExplicitPackage RequireArgUnpacking RequireLineBoundaryMatching RequireDotMatchAnything
+exclude = RequireTidyCode RequirePodSections ProhibitPostfixControls RequireRcsKeywords RequireExplicitPackage RequireArgUnpacking RequireLineBoundaryMatching RequireDotMatchAnything RequirePodLinksIncludeText
 include = Moose::ProhibitMultipleWiths Moose::ProhibitNewMethod Moose::RequireCleanNamespace Moose::RequireMakeImmutable
 color = 1
 verbose = 9
@@ -10,7 +10,7 @@ allow_includes = 1
 [CodeLayout::ProhibitTrailingWhitespace]
 
 [Documentation::PodSpelling]
-stop_words = metadata KiokuDB
+stop_words = metadata KiokuDB LeoNerd anno proxied
 
 [Subroutines::ProhibitUnusedPrivateSubroutines]
 private_name_regex = _(?!build_)\w
