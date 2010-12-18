@@ -1,0 +1,42 @@
+t/03_fdup_test_cowns.t .. 
+1..1
+refaddr: 35172384
+getc:  H
+tell:  55
+refaddr: 37531584
+getc:  
+tell:  54
+refaddr: 35172384
+getc:  e
+tell:  56
+refaddr: 37531584
+getc:  
+tell:  54
+refaddr: 35172384
+getc:  l
+tell:  57
+refaddr: 37531584
+getc:  
+tell:  54
+refaddr: 35172384
+getc:  l
+tell:  58
+refaddr: 37531584
+getc:  
+tell:  54
+refaddr: 35172384
+getc:  o
+tell:  59
+refaddr: 37531584
+getc:  
+tell:  54
+Dubious, test returned 255 (wstat 65280, 0xff00)
+Failed 1/1 subtests 
+
+Test Summary Report
+-------------------
+t/03_fdup_test_cowns.t (Wstat: 65280 Tests: 0 Failed: 0)
+  Non-zero exit status: 255
+  Parse errors: Bad plan.  You planned 1 tests but ran 0.
+Files=1, Tests=0,  0 wallclock secs ( 0.04 usr  0.01 sys +  0.03 cusr  0.00 csys =  0.08 CPU)
+Result: FAIL
