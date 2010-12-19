@@ -1,6 +1,19 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          Reworked the Exception code to be cleaner at the cost of a slight
+          initialisatin cost.
+
+          Reworked code bodies to unify seek/tell calls as _restore_pos and _set_pos.
+
+          Added _fh so internal code is less confusing.
+
+          Extended tests to cover more scenarios.
+
+          Added contributed suggestions as "alternative_techinques" with demonstrations how they
+          *( so far ) don't work. If people can get them to work (on all perls), that'd be great!.
+          ( Seems there are many weird fdup bugs in perl )
+
 
 0.01011322 2010-12-18 23:14:03 Pacific/Auckland
           First version.

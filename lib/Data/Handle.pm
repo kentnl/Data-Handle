@@ -154,9 +154,9 @@ sub _get_data_symbol {
 
 sub _get_start_offset {
   my ( $self, $package ) = @_;
-  if ( exists $datastash{$package}->{offset} ) {
-    return $datastash{$package}->{offset};
-  }
+
+  return $datastash{$package}->{offset} if ( exists $datastash{$package}->{offset} );
+
   if ( !$self->_has_data_symbol($package) ) {
     _e('Internal::BadGet')->throw('_get_start_offset was called when there is no data_symbol to get');
   }
@@ -170,9 +170,7 @@ sub _get_start_offset {
 
 sub _is_valid_data_tell {
   my ( $self, $package ) = @_;
-  if ( exists $datastash{$package} && $datastash{$package}->{valid} == 1 ) {
-    return 1;
-  }
+  return 1 if ( exists $datastash{$package} && $datastash{$package}->{valid} == 1 );
   if ( !$self->_has_data_symbol($package) ) {
     _e('Internal::BadGet')->throw('_is_valid_data_tell was called when there is no data_symbol to get');
   }
@@ -217,9 +215,9 @@ sub _stringify_metadata {
 
 sub _readline {
   my ( $self, @args ) = @_;
-  if (@args) {
-    _e('API::Invalid::Params')->throw('_readline() takes no parameters');
-  }
+
+  _e('API::Invalid::Params')->throw('_readline() takes no parameters') if @args;
+
   my $fh = $self->_fh;
   $self->_restore_pos();
   if (wantarray) {
@@ -236,9 +234,7 @@ sub _read {
   my ( $self, undef, $len, $offset ) = @_;
 
   ## no critic ( ProhibitMagicNumbers )
-  if ( scalar @_ < 3 or scalar @_ > 4 ) {
-    _e('API::Invalid::Params')->throw('_read() takes 2 or 3 parameters.');
-  }
+  _e('API::Invalid::Params')->throw('_read() takes 2 or 3 parameters.') if ( scalar @_ < 3 or scalar @_ > 4 );
 
   $self->_restore_pos();
   my $return;
@@ -246,7 +242,7 @@ sub _read {
     $return = read $self->_fh, $_[1], $len, $offset;
   }
   else {
-    $return = read $self->fh, $_[1], $len;
+    $return = read $self->_fh, $_[1], $len;
   }
   $self->_set_pos();
   return $return;
@@ -254,10 +250,7 @@ sub _read {
 
 sub _getc {
   my ($self) = @_;
-  if ( scalar @_ > 1 ) {
-    _e('API::Invalid::Params')->throw('_get() takes 0 parameters.');
-  }
-
+  _e('API::Invalid::Params')->throw('_get() takes 0 parameters.') if scalar @_ > 1;
   $self->_restore_pos();
   my $return = getc $self->_fh;
   $self->_set_pos();
@@ -269,9 +262,7 @@ sub _seek {
 
   ## no critic ( ProhibitMagicNumbers )
 
-  if ( scalar @_ != 3 ) {
-    _e('API::Invalid::Params')->throw('_seek() takes 2 params.');
-  }
+  _e('API::Invalid::Params')->throw('_seek() takes 2 params.') if scalar @_ != 3;
 
   my $fh = $self->_stash->{filehandle};
 
