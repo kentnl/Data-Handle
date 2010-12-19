@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          More tests to improve general function coverage
 
 0.01011421 2010-12-19 22:52:17 Pacific/Auckland
           Reworked the Exception code to be cleaner at the cost of a slight
