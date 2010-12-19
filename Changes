@@ -2,6 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.01011501 2010-12-20 02:15:59 Pacific/Auckland
+
           The method we were borrowing out of Carp wasn't there in old versions,
           so we've added a bit of magic to try get it from older carps too, so we don't fail
           on <= 5.10.1 :(
