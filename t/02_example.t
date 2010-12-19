@@ -49,8 +49,8 @@ is(
     # SLURPify
 
     {
-        local $/ = undef;
-        _diag(">>slurp>>" .  scalar <$data> . "<<slurp<<" );
+      local $/ = undef;
+      _diag( ">>slurp>>" . scalar <$data> . "<<slurp<<" );
     }
 
   },

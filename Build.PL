@@ -7,9 +7,11 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   'build_requires' => {
+    'Data::Dumper' => '0',
     'English' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
+    'IO::Handle' => '0',
     'Module::Build' => '0.3601',
     'Test::Fatal' => '0',
     'Test::More' => '0.96'
@@ -22,7 +24,7 @@ my %module_build_args = (
     'Kent Fredric <kentnl@cpan.org>'
   ],
   'dist_name' => 'Data-Handle',
-  'dist_version' => '0.01011322',
+  'dist_version' => '0.01011421',
   'license' => 'perl',
   'module_name' => 'Data::Handle',
   'recommends' => {},
@@ -33,6 +35,7 @@ my %module_build_args = (
     'Package::Stash' => '0',
     'Scalar::Util' => '0',
     'Symbol' => '0',
+    'Term::ANSIColor' => '0',
     'overload' => '0',
     'parent' => '0'
   },

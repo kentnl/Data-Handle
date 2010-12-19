@@ -10,7 +10,7 @@ allow_includes = 1
 [CodeLayout::ProhibitTrailingWhitespace]
 
 [Documentation::PodSpelling]
-stop_words = metadata KiokuDB LeoNerd anno proxied
+stop_words = metadata KiokuDB LeoNerd anno proxied backtraces informationally stringify stacktrace
 
 [Subroutines::ProhibitUnusedPrivateSubroutines]
 private_name_regex = _(?!build_)\w

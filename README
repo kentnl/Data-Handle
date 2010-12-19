@@ -2,7 +2,7 @@ NAME
     Data::Handle - A Very simple interface to the __DATA__ file handle.
 
 VERSION
-    version 0.01011322
+    version 0.01011421
 
 SYNOPSIS
         package Foo;
@@ -95,6 +95,10 @@ CREDITS
     Thanks to LeoNerd and anno, from #perl on irc.freenode.org, they were
     most helpful in helping me grok the magic of "tie" that makes the
     simplicity of the interface possible.
+
+    Thanks to Chas Owens and James Wright for their efforts with trying to
+    get something simpler with fdup()ing the descriptor ( Sadly not working
+    yet ).
 
 AUTHOR
     Kent Fredric <kentnl@cpan.org>

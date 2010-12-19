@@ -3,9 +3,11 @@ abstract: 'A Very simple interface to the __DATA__  file handle.'
 author:
   - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
+  Data::Dumper: 0
   English: 0
   File::Find: 0
   File::Temp: 0
+  IO::Handle: 0
   Module::Build: 0.3601
   Test::Fatal: 0
   Test::More: 0.96
@@ -21,36 +23,40 @@ name: Data-Handle
 provides:
   Data::Handle:
     file: lib/Data/Handle.pm
-    version: 0.01011322
+    version: 0.01011421
   Data::Handle::Exception:
     file: lib/Data/Handle/Exception.pm
-    version: 0.01011322
+    version: 0.01011421
   Data::Handle::IO:
     file: lib/Data/Handle/IO.pm
-    version: 0.01011322
+    version: 0.01011421
 requires:
   Carp: 0
   IO::File: 0
   Package::Stash: 0
   Scalar::Util: 0
   Symbol: 0
+  Term::ANSIColor: 0
   overload: 0
   parent: 0
 resources:
   homepage: http://github.com/kentfredric/Data-Handle/tree
   repository: git://github.com/kentfredric/Data-Handle.git
-version: 0.01011322
+version: 0.01011421
 x_BuiltWith:
   modules:
     Carp: 1.17
+    Data::Dumper: 2.125
     Dist::Zilla::PluginBundle::KENTNL: 0.01017322
     Dist::Zilla::PluginBundle::KENTNL::Lite: 0.01000002
     File::Temp: 0.22
     IO::File: 1.14
+    IO::Handle: 1.28
     Module::Build: 0.3607
     Package::Stash: 0.13
     Scalar::Util: 1.23
     Symbol: 1.07
+    Term::ANSIColor: 3.00
     Test::Fatal: 0.003
     Test::More: 0.96
     overload: 1.10
