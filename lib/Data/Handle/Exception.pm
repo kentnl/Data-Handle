@@ -25,27 +25,8 @@ As such, a dependency on something like Moose would be overkill, possibly even d
 So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a really really nasty but reasonably straight forward exception class.
 
 The actual Exception classes don't actually have their own sources, they're automatically generated when L<Data::Handle::Exception> is loaded.
-And we have some really nice backtraces stolen from Carp's code.
+And we have some really nice backtraces stolen from Carp's code, with some sexy coloured formatting. See L/stringify> for details.
 
-If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant to diagnosis.
-
-=over 4
-
-=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere.
-
-=item Yellow - Sources we're confident its unlikely to be a source of problems, currently
-
-=over 4
-
-=item Try::Tiny
-
-=item Test::Fatal
-
-=back
-
-=item White - Everything Else, the place the problem is most likely to be.
-
-=back
 
 =cut
 
@@ -85,12 +66,9 @@ sub throw {
   my @stacklines = ();
 
   {    # stolen parts  from Carp::ret_backtrace
-    my ( $i, @error ) = ( -1, $message );
-    my $mess;
-    my $err = join '', @error;
-    $i++;
+    my ($i) = 0;
 
-    my $tid_msg = '';
+    my $tid_msg = q{};
     if ( defined &threads::tid ) {
       my $tid = threads->tid;
       $tid_msg = " thread $tid" if $tid;
@@ -98,12 +76,12 @@ sub throw {
 
     my %i = Carp::caller_info($i);
 
-    push @stack,      \%i;
-    push @stacklines, "Exception '" . blessed($self) . "' Thrown at $i{file} line $i{line}$tid_msg";
+    push @stack, \%i;
+    push @stacklines, sprintf q{Exception '%s' thrown at %s line %s%s}, blessed($self), $i{file}, $i{line}, $tid_msg;
 
-    while ( my %i = Carp::caller_info( ++$i ) ) {
-      push @stack,      \%i;
-      push @stacklines, "$i{sub_name} called at $i{file} line $i{line}$tid_msg";
+    while ( my %j = Carp::caller_info( ++$i ) ) {
+      push @stack, \%j;
+      push @stacklines, sprintf q{%s called at %s line %s%s}, $j{sub_name}, $j{file}, $j{line}, $tid_msg;
     }
   }
   $self->{message}    = $message;
@@ -113,13 +91,60 @@ sub throw {
   Carp::confess($self);
 }
 
-sub _color_for_line {
-  my $line = shift;
-  return YELLOW if ( $line =~ qr{[/\\]Try[/\\]Tiny\.pm} );
-  return YELLOW if ( $line =~ qr{[/\\]Test[/\\]Fatal\.pm} );
-  return GREEN  if ( $line =~ qr{[/\\]Data[/\\]Handle(\.pm|[/\\])} );
-  return '';
+{
+  ## no critic ( RequireInterpolationOfMetachars )
+  my $s = q{(\x2F|\x5c)};
+  my $d = q{\x2E};
+  ## use critic
+  my $yellow = qr{
+      ${s}Try${s}Tiny${d}pm
+      |
+      ${s}Test${s}Fatal${d}pm
+  }x;
+  my $green = qr{
+    ${s}Data${s}Handle${d}pm
+    |
+    ${s}Data${s}Handle${s}
+  }x;
+
+  sub _color_for_line {
+    my $line = shift;
+    return YELLOW if ( $line =~ $yellow );
+    return GREEN  if ( $line =~ $green );
+    return q{};
+  }
 }
+
+=method stringify
+
+Turns this stacktrace into a string.
+
+    $exception->stringify();
+
+    my $str = "hello " . $exception . " world";
+
+If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant to diagnosis.
+
+=over 4
+
+=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere.
+
+=item Yellow - Sources we're confident its unlikely to be a source of problems, currently
+
+=over 4
+
+=item Try::Tiny
+
+=item Test::Fatal
+
+=back
+
+=item White - Everything Else, the place the problem is most likely to be.
+
+=back
+
+
+=cut
 
 sub stringify {
   my $self       = shift;
