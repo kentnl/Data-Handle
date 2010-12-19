@@ -24,7 +24,7 @@ my %module_build_args = (
     'Kent Fredric <kentnl@cpan.org>'
   ],
   'dist_name' => 'Data-Handle',
-  'dist_version' => '0.01011421',
+  'dist_version' => '0.01011500',
   'license' => 'perl',
   'module_name' => 'Data::Handle',
   'recommends' => {},

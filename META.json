@@ -62,15 +62,15 @@
    "provides" : {
       "Data::Handle" : {
          "file" : "lib/Data/Handle.pm",
-         "version" : "0.01011421"
+         "version" : "0.01011500"
       },
       "Data::Handle::Exception" : {
          "file" : "lib/Data/Handle/Exception.pm",
-         "version" : "0.01011421"
+         "version" : "0.01011500"
       },
       "Data::Handle::IO" : {
          "file" : "lib/Data/Handle/IO.pm",
-         "version" : "0.01011421"
+         "version" : "0.01011500"
       }
    },
    "release_status" : "stable",
@@ -82,7 +82,7 @@
          "web" : "http://github.com/kentfredric/Data-Handle/tree"
       }
    },
-   "version" : "0.01011421",
+   "version" : "0.01011500",
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.17",

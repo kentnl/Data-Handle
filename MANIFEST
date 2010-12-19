@@ -14,6 +14,8 @@ t/00-compile.t
 t/000-report-versions-tiny.t
 t/01_lowlevel.t
 t/02_example.t
+t/03_mess_with_seek.t
+t/04_things_that_fail.t
 t/alternative_techniques/03_fdup_test.t
 t/alternative_techniques/03_fdup_test_cowns.t
 t/alternative_techniques/03_fdup_test_cowns.t_out

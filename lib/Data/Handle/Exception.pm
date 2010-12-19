@@ -3,7 +3,7 @@ use warnings;
 
 package Data::Handle::Exception;
 BEGIN {
-  $Data::Handle::Exception::VERSION = '0.01011421';
+  $Data::Handle::Exception::VERSION = '0.01011500';
 }
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
@@ -131,23 +131,7 @@ sub _gen_tree {
   return $class;
 }
 
-
-sub generate_exception {
-  my ( $self, $class, $message ) = @_;
-
-  # $class =~ s/^(Data::Handle::Exception::|)//x;  # remove prefix if already there.
-  my $fullclass = $self->_gen_tree("Data::Handle::Exception::$class");
-
-  if ($message) {
-    return $fullclass->new()->throw($message);
-  }
-  else {
-    return $fullclass->new();
-  }
-
-}
-
-for (qw( API::Invalid API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos )) {
+for (qw( API::Invalid API::Invalid::Whence API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos )) {
   __PACKAGE__->_gen_tree("Data::Handle::Exception::$_");
 }
 
@@ -163,7 +147,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.01011421
+version 0.01011500
 
 =head1 SYNOPSIS
 
@@ -180,7 +164,7 @@ The idea is for more complex things to use this, instead of this using more comp
 
 As such, a dependency on something like Moose would be overkill, possibly even detrimental to encouraging the use of this module.
 
-So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a really really nasty but reasonably straight forward exception class.
+So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a slightly nasty but reasonably straight forward exception class.
 
 The actual Exception classes don't actually have their own sources, they're automatically generated when L<Data::Handle::Exception> is loaded.
 And we have some really nice backtraces stolen from Carp's code, with some sexy coloured formatting. See L/stringify> for details.
@@ -223,24 +207,6 @@ If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight li
 =item White - Everything Else, the place the problem is most likely to be.
 
 =back
-
-=head2 generate_exception
-
-    my $i = Data::Handle::Exception->generate_exception(
-        'Foo::Bar' => 'SomeMessage'
-    );
-
-    # $i isa Data::Handle::Exception::Foo::Bar
-    # Data::Handle::Exception::Foo::Bar isa
-    #    Data::Handle::Exception::Foo
-    #
-    # Data::Handle::Exception::Foo isa
-    #   Data::Handle::Exception
-    #
-    # $i has a message and a stack-trace
-    #
-
-    $i->throw():
 
 =head1 AUTHOR
 

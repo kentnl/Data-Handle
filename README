@@ -2,7 +2,7 @@ NAME
     Data::Handle - A Very simple interface to the __DATA__ file handle.
 
 VERSION
-    version 0.01011421
+    version 0.01011500
 
 SYNOPSIS
         package Foo;

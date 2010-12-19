@@ -53,6 +53,29 @@ is(
       _diag( ">>slurp>>" . scalar <$data> . "<<slurp<<" );
     }
 
+    # other tricks.
+
+    seek $data, 0, 0;
+
+    _diag( '::getc style>');
+
+    while( !eof( $data ) ){
+        _diag( getc $data  );
+    }
+
+    seek $data, 0, 0;
+
+    my $buffer = '';
+
+    read $data, $buffer, 10;
+
+    read $data, $buffer, 5, -2;
+
+    _diag( $buffer );
+
+    fileno $data;  # its undef :(
+
+
   },
   undef,
   'Example runs'
