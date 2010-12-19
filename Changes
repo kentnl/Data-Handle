@@ -27,6 +27,19 @@ Revision history for {{$dist->name}}
 
             Everything else is left white, and you should look for the problem there first.
 
+          Changes                                           |   27 ++++
+          lib/Data/Handle.pm                                |  151 +++++++------------
+          lib/Data/Handle/Exception.pm                      |  165 +++++++++++++++++----
+          perlcritic.rc                                     |    2 +-
+          t/01_lowlevel.t                                   |   25 +++
+          t/02_example.t                                    |    4 +-
+          t/alternative_techniques/03_fdup_test.t           |   56 +++++++
+          t/alternative_techniques/03_fdup_test_cowns.t     |   54 +++++++
+          t/alternative_techniques/03_fdup_test_cowns.t_out |   42 ++++++
+          t/alternative_techniques/04_fopen.t               |   27 ++++
+          t/alternative_techniques/05_new_from_fd.t         |   27 ++++
+          11 files changed, 457 insertions(+), 123 deletions(-)
+
 0.01011322 2010-12-18 23:14:03 Pacific/Auckland
           First version.
 
