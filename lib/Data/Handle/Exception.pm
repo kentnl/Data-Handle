@@ -65,6 +65,17 @@ sub throw {
   my @stack      = ();
   my @stacklines = ();
 
+  my $callerinfo;
+
+  if ( not defined &Carp::caller_info ) {
+      ## no critic (RequireBarewordIncludes, ProhibitPunctuationVars )
+    require 'Carp/Heavy.pm' unless $^O eq 'MSWin32';
+    require 'Carp\Heavy.pm' if $^O eq 'MSWin32';
+    $callerinfo = \&Carp::Heavy::caller_info;
+  }
+  else {
+    $callerinfo = \&Carp::caller_info;
+  }
   {    # stolen parts  from Carp::ret_backtrace
     my ($i) = 0;
 
@@ -74,12 +85,12 @@ sub throw {
       $tid_msg = " thread $tid" if $tid;
     }
 
-    my %i = Carp::caller_info($i);
+    my %i = $callerinfo->($i);
 
     push @stack, \%i;
     push @stacklines, sprintf q{Exception '%s' thrown at %s line %s%s}, blessed($self), $i{file}, $i{line}, $tid_msg;
 
-    while ( my %j = Carp::caller_info( ++$i ) ) {
+    while ( my %j = $callerinfo->( ++$i ) ) {
       push @stack, \%j;
       push @stacklines, sprintf q{%s called at %s line %s%s}, $j{sub_name}, $j{file}, $j{line}, $tid_msg;
     }
@@ -177,9 +188,7 @@ sub _gen {
 sub _gen_tree {
   my ( $self, $class ) = @_;
   my $parent = $class;
-  require Carp;
 
-  #    Carp::carp("Generating $class.");
   $parent =~ s{
      ::[^:]+$
     }{}x;
