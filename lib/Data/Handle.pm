@@ -361,6 +361,8 @@ Thanks to LeoNerd and anno, from #perl on irc.freenode.org,
 they were most helpful in helping me grok the magic of C<tie> that
 makes the simplicity of the interface possible.
 
+Thansk to Chas Owens and l_wright for their efforts with trying to get something simpler with fdup()ing the descriptor ( Sadly not working yet ).
+
 =cut
 1;
 
