@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01011500 2010-12-20 01:36:06 Pacific/Auckland
           More tests to improve general function coverage
 
           generate_exception is gone, depercated. Replace:
