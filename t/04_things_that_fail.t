@@ -130,6 +130,21 @@ diag($e) if $needdiag;
 
 isnt(
   $e = exception {
+    Data::Handle->new('Data')->_seek(1,4);
+  },
+  undef,
+  '_seek Fails with whences not 0-2'
+);
+
+$needdiag = 0;
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::Invalid::Whence', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::Invalid', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
+diag($e) if $needdiag;
+
+isnt(
+  $e = exception {
     Data::Handle->new('Data')->_tell(1);
   },
   undef,

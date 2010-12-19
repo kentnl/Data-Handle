@@ -192,7 +192,7 @@ sub _gen_tree {
   return $class;
 }
 
-for (qw( API::Invalid API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos )) {
+for (qw( API::Invalid API::Invalid::Whence API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos )) {
   __PACKAGE__->_gen_tree("Data::Handle::Exception::$_");
 }
 
