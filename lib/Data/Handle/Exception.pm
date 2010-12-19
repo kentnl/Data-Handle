@@ -33,6 +33,7 @@ use overload '""' => sub {
   my $self = shift;
   return $self->{message} . "\n\n" . ( join qq{\n}, @{ $self->{stack} } ) . "\n\n";
 };
+use Scalar::Util qw( blessed );
 
 =method new
 
@@ -42,10 +43,8 @@ use overload '""' => sub {
 =cut
 
 sub new {
-  my ( $class, $message, $stack ) = @_;
+  my ( $class ) = @_;
   my $self = {};
-  $self->{message} = $message;
-  $self->{stack}   = $stack;
   bless $self, $class;
   return $self;
 }
@@ -58,7 +57,21 @@ sub new {
 
 sub throw {
   my $self = shift;
+  if( not blessed $self ){
+      $self = $self->new();
+  }
+  my $message = shift;
+  my @stack;
+  my $i = 0;
+  while ( my @line = caller $i ) {
+    ## no critic ( ProhibitMagicNumbers )
+    push @stack, sprintf q{%s:%s  %s: %s}, $line[1], $line[2], $line[0], $line[3];
+    $i++;
+  }
   require Carp;
+  $self->{message} = $message;
+  $self->{stack} = \@stack;
+
   Carp::confess($self);
 }
 
@@ -73,6 +86,23 @@ sub _gen {
   eval $code or throw(qq{ Exception generating exception :[ $@ });
   $dynaexceptions->{$fullclass} = 1;
   return 1;
+}
+
+sub _gen_tree {
+    my ( $self, $class ) = @_ ;
+    my $parent = $class;
+    require Carp;
+#    Carp::carp("Generating $class.");
+    $parent =~ s{
+     ::[^:]+$
+    }{}x;
+    if ( !exists $dynaexceptions->{$parent} ) {
+        $self->_gen_tree( $parent );
+    }
+    if ( !exists $dynaexceptions->{$class} ) {
+        $self->_gen( $class, $parent );
+    }
+    return $class;
 }
 
 =method generate_exception
@@ -99,26 +129,19 @@ sub _gen {
 sub generate_exception {
   my ( $self, $class, $message ) = @_;
 
-  my $fullclass   = "Data::Handle::Exception::$class";
-  my $parentclass = $fullclass;
-  $parentclass =~ s{
-     ::[^:]+$
-   }{}x;
+  # $class =~ s/^(Data::Handle::Exception::|)//x;  # remove prefix if already there.
+  my $fullclass   = $self->_gen_tree("Data::Handle::Exception::$class");
 
-  if ( !exists $dynaexceptions->{$parentclass} ) {
-    $self->generate_exception( $parentclass, q{} );
+  if( $message ){
+      return $fullclass->new()->throw($message);
+  } else {
+      return $fullclass->new();
   }
-  if ( !exists $dynaexceptions->{$fullclass} ) {
-    $self->_gen( $fullclass, $parentclass );
-  }
-  my @stack;
-  my $i = 0;
-  while ( my @line = caller $i ) {
-    ## no critic ( ProhibitMagicNumbers )
-    push @stack, sprintf q{%s:%s  %s: %s}, $line[1], $line[2], $line[0], $line[3];
-    $i++;
-  }
-  return $fullclass->new( $message, \@stack );
+
+}
+
+for ( qw( API::Invalid API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos ) ){
+    __PACKAGE__->_gen_tree( "Data::Handle::Exception::$_" );
 }
 
 1;
