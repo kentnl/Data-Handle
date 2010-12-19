@@ -130,7 +130,7 @@ diag($e) if $needdiag;
 
 isnt(
   $e = exception {
-    Data::Handle->new('Data')->_seek(1,4);
+    Data::Handle->new('Data')->_seek( 1, 4 );
   },
   undef,
   '_seek Fails with whences not 0-2'
@@ -204,5 +204,97 @@ for my $meth (qw( _open _close _printf _print _write )) {
   $needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
   diag($e) if $needdiag;
 }
+
+isnt(
+  $e = exception {
+    my $instance = Data::Handle->new('Data');
+    syswrite $instance, "hello";
+  },
+  undef,
+  'syswrite $instance Fails'
+);
+
+$needdiag = 0;
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::Invalid', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
+diag($e) if $needdiag;
+
+isnt(
+  $e = exception {
+    my $instance = Data::Handle->new('Data');
+    print {$instance} "Hello";
+  },
+  undef,
+  'print { $instance } Fails'
+);
+
+$needdiag = 0;
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::Invalid', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
+diag($e) if $needdiag;
+
+isnt(
+  $e = exception {
+    my $instance = Data::Handle->new('Data');
+    printf {$instance} "Hello %s", 'foo';
+  },
+  undef,
+  'printf { $instance } Fails'
+);
+
+$needdiag = 0;
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::Invalid', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
+diag($e) if $needdiag;
+
+isnt(
+  $e = exception {
+    my $instance = Data::Handle->new('Data');
+    close $instance;
+  },
+  undef,
+  'close $instance Fails'
+);
+
+$needdiag = 0;
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::Invalid', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
+diag($e) if $needdiag;
+
+isnt(
+  $e = exception {
+    my $instance = Data::Handle->new('Data');
+    binmode $instance, ':raw';
+  },
+  undef,
+  'binmode $instance Fails'
+);
+
+$needdiag = 0;
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::NotImplemented', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
+diag($e) if $needdiag;
+
+isnt(
+  $e = exception {
+    my $instance = Data::Handle->new('Data');
+    my $string = "";
+    open $instance, '<', \$string;
+  },
+  undef,
+  'open $instance Fails'
+);
+
+$needdiag = 0;
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API::Invalid', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception::API', 'Expected Exception Type' );
+$needdiag = 1 unless isa_ok( $e, 'Data::Handle::Exception', 'Expected Exception Type' );
+diag($e) if $needdiag;
+
 
 done_testing;

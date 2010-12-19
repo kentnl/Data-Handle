@@ -73,6 +73,9 @@ is(
 
     _diag( $buffer );
 
+    fileno $data;  # its undef :(
+
+
   },
   undef,
   'Example runs'
