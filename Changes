@@ -11,6 +11,18 @@ Revision history for {{$dist->name}}
 
             _gen_tree($full_class)->throw( $message )
 
+          Coverage testing detected a missing exception class, fixed in this release.
+
+          All tied() methods now tested to some degree to work.
+
+          Changes                      |   23 ++++
+          lib/Data/Handle/Exception.pm |   40 +------
+          t/02_example.t               |   23 ++++
+          t/03_mess_with_seek.t        |   28 ++++
+          t/04_things_that_fail.t      |  300 ++++++++++++++++++++++++++++++++++++++++++
+          5 files changed, 376 insertions(+), 38 deletions(-)
+
+
 0.01011421 2010-12-19 22:52:17 Pacific/Auckland
           Reworked the Exception code to be cleaner at the cost of a slight
           initialisatin cost.
