@@ -5,8 +5,8 @@ Revision history for {{$dist->name}}
 
           generate_exception is gone, depercated. Replace:
 
-            generate_exception($class , $message)->throw() 
-        
+            generate_exception($class , $message)->throw()
+
           with
 
             _gen_tree($full_class)->throw( $message )
