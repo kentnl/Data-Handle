@@ -2,17 +2,17 @@
 use strict;
 use warnings;
 
-use Test::More tests => 1;                      # last test to print
+use Test::More 0.96 skip_all => 'Example alternative technique that doesn\'t work';
 
 use lib "t/lib/";
 use Data;
 
+use IO::Handle;
+
+
+
 sub getfd  {
-    my $handle = do {
-        no strict 'refs'; \*{"Data::DATA"};
-    };
-    open my $dh, "<&=", $handle;
-    return $dh;
+    return IO::Handle->new_from_fd("Data::DATA", "r" );
 }
 
 my $x  = getfd();
