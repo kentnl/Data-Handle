@@ -71,11 +71,8 @@ sub throw {
       ## no critic (RequireBarewordIncludes, ProhibitPunctuationVars )
     require 'Carp/Heavy.pm' unless $^O eq 'MSWin32';
     require 'Carp\Heavy.pm' if $^O eq 'MSWin32';
-    $callerinfo = \&Carp::Heavy::caller_info;
   }
-  else {
-    $callerinfo = \&Carp::caller_info;
-  }
+  $callerinfo = \&Carp::caller_info;
   {    # stolen parts  from Carp::ret_backtrace
     my ($i) = 0;
 
