@@ -23,13 +23,13 @@ name: Data-Handle
 provides:
   Data::Handle:
     file: lib/Data/Handle.pm
-    version: 0.01011501
+    version: 0.01011601
   Data::Handle::Exception:
     file: lib/Data/Handle/Exception.pm
-    version: 0.01011501
+    version: 0.01011601
   Data::Handle::IO:
     file: lib/Data/Handle/IO.pm
-    version: 0.01011501
+    version: 0.01011601
 requires:
   Carp: 0
   IO::File: 0
@@ -42,7 +42,7 @@ requires:
 resources:
   homepage: http://github.com/kentfredric/Data-Handle/tree
   repository: git://github.com/kentfredric/Data-Handle.git
-version: 0.01011501
+version: 0.01011601
 x_BuiltWith:
   modules:
     Carp: 1.17

@@ -3,7 +3,7 @@ use warnings;
 
 package Data::Handle::Exception;
 BEGIN {
-  $Data::Handle::Exception::VERSION = '0.01011501';
+  $Data::Handle::Exception::VERSION = '0.01011601';
 }
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
@@ -40,11 +40,8 @@ sub throw {
       ## no critic (RequireBarewordIncludes, ProhibitPunctuationVars )
     require 'Carp/Heavy.pm' unless $^O eq 'MSWin32';
     require 'Carp\Heavy.pm' if $^O eq 'MSWin32';
-    $callerinfo = \&Carp::Heavy::caller_info;
   }
-  else {
-    $callerinfo = \&Carp::caller_info;
-  }
+  $callerinfo = \&Carp::caller_info;
   {    # stolen parts  from Carp::ret_backtrace
     my ($i) = 0;
 
@@ -156,7 +153,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.01011501
+version 0.01011601
 
 =head1 SYNOPSIS
 

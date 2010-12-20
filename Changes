@@ -1,5 +1,14 @@
 Revision history for Data-Handle
 
+0.01011601 2010-12-21 02:07:01 Pacific/Auckland
+
+          Yuck. The way caller_info is provided is ambiguous. Hopefully this release will get that right.
+
+           Changes                      |    9 +++++++++
+           lib/Data/Handle/Exception.pm |    5 +----
+           2 files changed, 10 insertions(+), 4 deletions(-)
+
+
 0.01011501 2010-12-20 02:15:59 Pacific/Auckland
 
           The method we were borrowing out of Carp wasn't there in old versions,
