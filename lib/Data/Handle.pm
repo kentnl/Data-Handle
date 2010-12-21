@@ -183,7 +183,7 @@ sub _is_valid_data_tell {
   #
   my $checkfor = qq{__DATA__\n};
   seek $fh, ( $offset - length $checkfor ), 0;
-  read $fh, my $buffer, length $checkfor;
+  read $fh, my ($buffer), length $checkfor;
   seek $fh, $offset, 0;
 
   $datastash{$package}->{previous_bytes} = $buffer;
