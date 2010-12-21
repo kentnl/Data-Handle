@@ -8,6 +8,11 @@ Revision history for {{$dist->name}}
 
          Have to put a fix in as well, because Term::ANSIColor clobbers $@
 
+         Changes                      |   13 +++++
+         lib/Data/Handle/Exception.pm |  101 ++++++++++++++++++++++++++++++++++++++++--
+         perlcritic.rc                |    2 +-
+         3 files changed, 111 insertions(+), 5 deletions(-)
+
 0.01011617 2010-12-21 18:46:24 Pacific/Auckland
 
           Fix "missing parentheses around my ( )" for Perl-5.6
