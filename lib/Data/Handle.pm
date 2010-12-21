@@ -3,7 +3,7 @@ use warnings;
 
 package Data::Handle;
 BEGIN {
-  $Data::Handle::VERSION = '0.01011601';
+  $Data::Handle::VERSION = '0.01011617';
 }
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
@@ -99,7 +99,7 @@ sub _is_valid_data_tell {
   #
   my $checkfor = qq{__DATA__\n};
   seek $fh, ( $offset - length $checkfor ), 0;
-  read $fh, my $buffer, length $checkfor;
+  read $fh, my ($buffer), length $checkfor;
   seek $fh, $offset, 0;
 
   $datastash{$package}->{previous_bytes} = $buffer;
@@ -246,7 +246,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 0.01011601
+version 0.01011617
 
 =head1 SYNOPSIS
 

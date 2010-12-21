@@ -1,5 +1,14 @@
 Revision history for Data-Handle
 
+0.01011617 2010-12-21 18:46:24 Pacific/Auckland
+
+          Fix "missing parentheses around my ( )" for Perl-5.6
+
+          Changes            |    9 +++++++++
+          lib/Data/Handle.pm |    2 +-
+          2 files changed, 10 insertions(+), 1 deletions(-)
+
+
 0.01011601 2010-12-21 02:07:01 Pacific/Auckland
 
           Yuck. The way caller_info is provided is ambiguous. Hopefully this release will get that right.
