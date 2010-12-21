@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+         Distribution Change only. Otherwise identical to previous release.
+         Don't index DB.
+
 0.01011701 2010-12-22 02:29:00 Pacific/Auckland
 
          Give up on trying to operate with the Carp shipped with 5.6.2.
