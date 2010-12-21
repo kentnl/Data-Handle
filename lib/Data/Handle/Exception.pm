@@ -97,6 +97,7 @@ sub _stolen_carp_stuff {
   };
 
   my ($_stolen_caller_info) = sub {
+
     my $i = shift(@_) + 1;
     my %call_info;
     {
@@ -143,6 +144,7 @@ sub _stolen_carp_stuff {
 
 sub throw {
   my $self = shift;
+
   if ( not blessed $self ) {
     $self = $self->new();
   }
@@ -186,7 +188,6 @@ sub throw {
   $self->{message}    = $message;
   $self->{stacklines} = \@stacklines;
   $self->{stack}      = \@stack;
-
   Carp::confess($self);
 }
 
@@ -246,6 +247,7 @@ If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight li
 =cut
 
 sub stringify {
+  local $@;    # Term::ANSIColour clobbers $@
   my $self       = shift;
   my $message    = $self->{message};
   my @stacklines = @{ $self->{stacklines} };
