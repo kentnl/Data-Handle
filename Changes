@@ -2,6 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.01011617 2010-12-21 18:46:24 Pacific/Auckland
+
           Fix "missing parentheses around my ( )" for Perl-5.6
 
           Changes            |    9 +++++++++
