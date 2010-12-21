@@ -1,5 +1,5 @@
 severity = 1
-exclude = RequireTidyCode RequirePodSections ProhibitPostfixControls RequireRcsKeywords RequireExplicitPackage RequireArgUnpacking RequireLineBoundaryMatching RequireDotMatchAnything RequirePodLinksIncludeText
+exclude = RequireTidyCode RequirePodSections ProhibitPostfixControls RequireRcsKeywords RequireExplicitPackage RequireArgUnpacking RequireLineBoundaryMatching RequireDotMatchAnything RequirePodLinksIncludeText ProhibitUnrestrictedNoCritic
 include = Moose::ProhibitMultipleWiths Moose::ProhibitNewMethod Moose::RequireCleanNamespace Moose::RequireMakeImmutable
 color = 1
 verbose = 9
