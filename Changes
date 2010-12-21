@@ -1,5 +1,18 @@
 Revision history for Data-Handle
 
+0.01011701 2010-12-22 02:29:00 Pacific/Auckland
+
+         Give up on trying to operate with the Carp shipped with 5.6.2.
+         If its not there, and not in Carp::Heavy's injections, 
+         Use a copy of one we stole and made work.
+
+         Have to put a fix in as well, because Term::ANSIColor clobbers $@
+
+         Changes                      |   13 +++++
+         lib/Data/Handle/Exception.pm |  101 ++++++++++++++++++++++++++++++++++++++++--
+         perlcritic.rc                |    2 +-
+         3 files changed, 111 insertions(+), 5 deletions(-)
+
 0.01011617 2010-12-21 18:46:24 Pacific/Auckland
 
           Fix "missing parentheses around my ( )" for Perl-5.6

@@ -3,7 +3,7 @@ use warnings;
 
 package Data::Handle::Exception;
 BEGIN {
-  $Data::Handle::Exception::VERSION = '0.01011617';
+  $Data::Handle::Exception::VERSION = '0.01011701';
 }
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
@@ -23,9 +23,100 @@ sub new {
   return $self;
 }
 
+## no critic ( ProhibitUnrestrictedNoCritic ProhibitExcessComplexity )
+sub _stolen_carp_stuff {
+  ## no critic
+  my $MaxArgNums = 20;
+  my ($_stolen_str_len_trim) = sub {
+    my $str = shift;
+    my $max = shift || 0;
+    if ( 2 < $max and $max < length($str) ) {
+      substr( $str, $max - 3 ) = '...';
+    }
+    return $str;
+  };
+
+  my ($_stolen_format_arg) = sub {
+    my $arg = shift;
+    if ( ref($arg) ) {
+      $arg = defined($overload::VERSION) ? overload::StrVal($arg) : "$arg";
+    }
+    if ( defined($arg) ) {
+      $arg =~ s/'/\\'/g;
+      $arg = $_stolen_str_len_trim->( $arg, $MaxArgNums );
+
+      # Quote it?
+      $arg = "'$arg'" unless $arg =~ /^-?[\d.]+\z/;
+    }
+    else {
+      $arg = 'undef';
+    }
+
+    $arg =~ s/([[:cntrl:]]|[[:^ascii:]])/sprintf("\\x{%x}",ord($1))/eg;
+    return $arg;
+  };
+  my ($_stolen_get_subname) = sub {
+    my $info = shift;
+    if ( defined( $info->{evaltext} ) ) {
+      my $eval = $info->{evaltext};
+      if ( $info->{is_require} ) {
+        return "require $eval";
+      }
+      else {
+        $eval =~ s/([\\\'])/\\$1/g;
+        return "eval '" . $_stolen_str_len_trim->( $eval, 50 ) . "'";
+      }
+    }
+    return ( $info->{sub} eq '(eval)' ) ? 'eval {...}' : $info->{sub};
+  };
+
+  my ($_stolen_caller_info) = sub {
+
+    my $i = shift(@_) + 1;
+    my %call_info;
+    {
+
+      package DB;
+BEGIN {
+  $DB::VERSION = '0.01011701';
+}
+      @DB::args = \$i;    # A sentinal, which no-one else has the address of
+      @call_info{qw(pack file line sub has_args wantarray evaltext is_require)} =
+        defined &{"CORE::GLOBAL::caller"} ? &{"CORE::GLOBAL::caller"}($i) : caller($i);
+    }
+
+    unless ( defined $call_info{pack} ) {
+      return ();
+    }
+
+    my $sub_name = $_stolen_get_subname->( \%call_info );
+    if ( $call_info{has_args} ) {
+      my @args;
+      if ( @DB::args == 1 && ref $DB::args[0] eq ref \$i && $DB::args[0] == \$i ) {
+        @DB::args = ();                                                                   # Don't let anyone see the address of $i
+        @args     = "** Incomplete caller override detected; \@DB::args were not set **";
+      }
+      else {
+        @args = map { $_stolen_format_arg->($_) } @DB::args;
+      }
+      if ( $MaxArgNums and @args > $MaxArgNums ) {                                        # More than we want to show?
+        $#args = $MaxArgNums;
+        push @args, '...';
+      }
+
+      # Push the args onto the subroutine
+      $sub_name .= '(' . join( ', ', @args ) . ')';
+    }
+    $call_info{sub_name} = $sub_name;
+    return wantarray() ? %call_info : \%call_info;
+  };
+  return $_stolen_caller_info;
+}
+
 
 sub throw {
   my $self = shift;
+
   if ( not blessed $self ) {
     $self = $self->new();
   }
@@ -34,14 +125,19 @@ sub throw {
   my @stack      = ();
   my @stacklines = ();
 
+  # This is mostly because want to benefit from all new fixes in carp.
   my $callerinfo;
-
   if ( not defined &Carp::caller_info ) {
-      ## no critic (RequireBarewordIncludes, ProhibitPunctuationVars )
+    ## no critic (RequireBarewordIncludes, ProhibitPunctuationVars )
     require 'Carp/Heavy.pm' unless $^O eq 'MSWin32';
     require 'Carp\Heavy.pm' if $^O eq 'MSWin32';
   }
-  $callerinfo = \&Carp::caller_info;
+  if ( defined &Carp::caller_info ) {
+    $callerinfo = \&Carp::caller_info;
+  }
+  else {
+    $callerinfo = _stolen_carp_stuff();
+  }
   {    # stolen parts  from Carp::ret_backtrace
     my ($i) = 0;
 
@@ -64,7 +160,6 @@ sub throw {
   $self->{message}    = $message;
   $self->{stacklines} = \@stacklines;
   $self->{stack}      = \@stack;
-
   Carp::confess($self);
 }
 
@@ -94,6 +189,7 @@ sub throw {
 
 
 sub stringify {
+  local $@;    # Term::ANSIColour clobbers $@
   my $self       = shift;
   my $message    = $self->{message};
   my @stacklines = @{ $self->{stacklines} };
@@ -153,7 +249,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.01011617
+version 0.01011701
 
 =head1 SYNOPSIS
 

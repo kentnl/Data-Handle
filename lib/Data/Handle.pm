@@ -3,7 +3,7 @@ use warnings;
 
 package Data::Handle;
 BEGIN {
-  $Data::Handle::VERSION = '0.01011617';
+  $Data::Handle::VERSION = '0.01011701';
 }
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
@@ -246,7 +246,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 0.01011617
+version 0.01011701
 
 =head1 SYNOPSIS
 
