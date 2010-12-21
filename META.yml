@@ -20,19 +20,19 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Data-Handle
+no_index:
+  namespace:
+    - DB
 provides:
-  DB:
-    file: lib/Data/Handle/Exception.pm
-    version: 0.01011701
   Data::Handle:
     file: lib/Data/Handle.pm
-    version: 0.01011701
+    version: 0.01011702
   Data::Handle::Exception:
     file: lib/Data/Handle/Exception.pm
-    version: 0.01011701
+    version: 0.01011702
   Data::Handle::IO:
     file: lib/Data/Handle/IO.pm
-    version: 0.01011701
+    version: 0.01011702
 requires:
   Carp: 0
   IO::File: 0
@@ -45,7 +45,7 @@ requires:
 resources:
   homepage: http://github.com/kentfredric/Data-Handle/tree
   repository: git://github.com/kentfredric/Data-Handle.git
-version: 0.01011701
+version: 0.01011702
 x_BuiltWith:
   modules:
     Carp: 1.17
@@ -76,23 +76,6 @@ x_BuiltWith:
 x_Dist_Zilla:
   plugins:
     -
-      class: Dist::Zilla::Plugin::AutoVersion::Relative
-      config:
-        Dist::Zilla::Plugin::AutoVersion::Relative:
-          format: "{{ sprintf('%d.%02d%04d%02d', $major, $minor, days, hours) }}"
-          major: 0
-          minor: 1
-          relative_to:
-            day: 29
-            hour: 0
-            minute: 0
-            month: 8
-            second: 0
-            time_zone: Pacific/Auckland
-            year: 2010
-      name: '@KENTNL/AutoVersion::Relative'
-      version: 0.01037118
-    -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@KENTNL/GatherDir'
       version: 4.102346
@@ -120,10 +103,6 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::PodWeaver
       name: '@KENTNL/PodWeaver'
       version: 3.101641
-    -
-      class: Dist::Zilla::Plugin::MetaProvides::Package
-      name: '@KENTNL/MetaProvides::Package'
-      version: 1.12044908
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@KENTNL/MetaJSON'
@@ -273,13 +252,17 @@ x_Dist_Zilla:
       name: '@KENTNL/Twitter'
       version: 0.009
     -
-      class: Dist::Zilla::Plugin::Prereqs
-      config:
-        Dist::Zilla::Plugin::Prereqs:
-          phase: runtime
-          type: requires
-      name: Prereqs
-      version: 4.102346
+      class: Dist::Zilla::Plugin::MetaProvides::Package
+      name: MetaProvides::Package
+      version: 1.12044908
+    -
+      class: Dist::Zilla::Plugin::MetaNoIndex
+      name: MetaNoIndex
+      version: 1.101550
+    -
+      class: Dist::Zilla::Plugin::Git::NextVersion
+      name: Git::NextVersion
+      version: 1.102810
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'

@@ -3,7 +3,7 @@ use warnings;
 
 package Data::Handle::Exception;
 BEGIN {
-  $Data::Handle::Exception::VERSION = '0.01011701';
+  $Data::Handle::Exception::VERSION = '0.01011702';
 }
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
@@ -78,7 +78,7 @@ sub _stolen_carp_stuff {
 
       package DB;
 BEGIN {
-  $DB::VERSION = '0.01011701';
+  $DB::VERSION = '0.01011702';
 }
       @DB::args = \$i;    # A sentinal, which no-one else has the address of
       @call_info{qw(pack file line sub has_args wantarray evaltext is_require)} =
@@ -249,7 +249,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.01011701
+version 0.01011702
 
 =head1 SYNOPSIS
 
