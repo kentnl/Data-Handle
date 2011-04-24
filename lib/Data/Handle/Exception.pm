@@ -102,7 +102,8 @@ sub _stolen_carp_stuff {
     my %call_info;
     {
 
-      package DB;
+      package # Hide from Dzil and things.
+        DB;
       @DB::args = \$i;    # A sentinal, which no-one else has the address of
       @call_info{qw(pack file line sub has_args wantarray evaltext is_require)} =
         defined &{"CORE::GLOBAL::caller"} ? &{"CORE::GLOBAL::caller"}($i) : caller($i);

@@ -4,9 +4,20 @@ Revision history for {{$dist->name}}
         [Packaging]
         - Move from @KENTNL to @Author::KENTNL
         - Use recent features of @Author::KENTNL
+        - Ship .perltidyrc
 
         [Internals]
         - Explicitly set $@ to undef ( critic )
+        - Stop setting $DB::VERSION
+
+        [Tests]
+        - Add CPAN::Changes tests.
+        - Add release portability tests.
+
+        [Dependencies::Devel]
+        - Advertise @Author::KENTNL
+
+
 
 0.01011702 2010-12-22 02:43:35 Pacific/Auckland
 
