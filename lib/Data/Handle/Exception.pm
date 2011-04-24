@@ -3,7 +3,7 @@ use warnings;
 
 package Data::Handle::Exception;
 BEGIN {
-  $Data::Handle::Exception::VERSION = '0.01011702';
+  $Data::Handle::Exception::VERSION = '0.01011703';
 }
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
@@ -76,10 +76,8 @@ sub _stolen_carp_stuff {
     my %call_info;
     {
 
-      package DB;
-BEGIN {
-  $DB::VERSION = '0.01011702';
-}
+      package # Hide from Dzil and things.
+        DB;
       @DB::args = \$i;    # A sentinal, which no-one else has the address of
       @call_info{qw(pack file line sub has_args wantarray evaltext is_require)} =
         defined &{"CORE::GLOBAL::caller"} ? &{"CORE::GLOBAL::caller"}($i) : caller($i);
@@ -189,7 +187,8 @@ sub throw {
 
 
 sub stringify {
-  local $@;    # Term::ANSIColour clobbers $@
+  ## no critic ( ProhibitPunctuationVars )
+  local $@ = undef;  # Term::ANSIColour clobbers $@
   my $self       = shift;
   my $message    = $self->{message};
   my @stacklines = @{ $self->{stacklines} };
@@ -249,7 +248,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.01011702
+version 0.01011703
 
 =head1 SYNOPSIS
 
@@ -316,7 +315,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

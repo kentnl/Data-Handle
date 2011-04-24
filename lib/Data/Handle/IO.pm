@@ -4,7 +4,7 @@ use warnings;
 
 package Data::Handle::IO;
 BEGIN {
-  $Data::Handle::IO::VERSION = '0.01011702';
+  $Data::Handle::IO::VERSION = '0.01011703';
 }
 
 # ABSTRACT: A Tie Package so Data::Handle can look and feel like a normal handle.
@@ -49,7 +49,7 @@ Data::Handle::IO - A Tie Package so Data::Handle can look and feel like a normal
 
 =head1 VERSION
 
-version 0.01011702
+version 0.01011703
 
 =head1 DESCRIPTION
 
@@ -70,7 +70,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

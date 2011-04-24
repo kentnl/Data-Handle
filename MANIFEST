@@ -1,3 +1,4 @@
+.perltidyrc
 Build.PL
 Changes
 LICENSE
@@ -24,10 +25,10 @@ t/alternative_techniques/05_new_from_fd.t
 t/author-critic.t
 t/lib/Data.pm
 t/lib/SectionData.pm
+t/release-cpan-changes.t
 t/release-distmeta.t
 t/release-eol.t
 t/release-kwalitee.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
-t/release-portability.t
 weaver.ini
