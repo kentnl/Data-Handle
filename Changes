@@ -19,12 +19,12 @@ Revision history for {{$dist->name}}
 
 
 
-0.01011702 2010-12-22 02:43:35 Pacific/Auckland
+0.01011702 2010-12-21T13:43:35Z
 
          Distribution Change only. Otherwise identical to previous release.
          Don't index DB.
 
-0.01011701 2010-12-22 02:29:00 Pacific/Auckland
+0.01011701 2010-12-21T13:29:00Z
 
          Give up on trying to operate with the Carp shipped with 5.6.2.
          If its not there, and not in Carp::Heavy's injections, 
@@ -37,7 +37,7 @@ Revision history for {{$dist->name}}
          perlcritic.rc                |    2 +-
          3 files changed, 111 insertions(+), 5 deletions(-)
 
-0.01011617 2010-12-21 18:46:24 Pacific/Auckland
+0.01011617 2010-12-21T05:46:24Z
 
           Fix "missing parentheses around my ( )" for Perl-5.6
 
@@ -46,7 +46,7 @@ Revision history for {{$dist->name}}
           2 files changed, 10 insertions(+), 1 deletions(-)
 
 
-0.01011601 2010-12-21 02:07:01 Pacific/Auckland
+0.01011601 2010-12-20T13:07:01Z
 
           Yuck. The way caller_info is provided is ambiguous. Hopefully this release will get that right.
 
@@ -55,7 +55,7 @@ Revision history for {{$dist->name}}
            2 files changed, 10 insertions(+), 4 deletions(-)
 
 
-0.01011501 2010-12-20 02:15:59 Pacific/Auckland
+0.01011501 2010-12-19T13:15:59Z
 
           The method we were borrowing out of Carp wasn't there in old versions,
           so we've added a bit of magic to try get it from older carps too, so we don't fail
@@ -66,7 +66,7 @@ Revision history for {{$dist->name}}
           2 files changed, 24 insertions(+), 4 deletions(-)
 
 
-0.01011500 2010-12-20 01:36:06 Pacific/Auckland
+0.01011500 2010-12-19T12:36:06Z
           More tests to improve general function coverage
 
           generate_exception is gone, depercated. Replace:
@@ -89,7 +89,7 @@ Revision history for {{$dist->name}}
           5 files changed, 376 insertions(+), 38 deletions(-)
 
 
-0.01011421 2010-12-19 22:52:17 Pacific/Auckland
+0.01011421 2010-12-19T09:52:17Z
           Reworked the Exception code to be cleaner at the cost of a slight
           initialisatin cost.
 
@@ -129,6 +129,6 @@ Revision history for {{$dist->name}}
           t/alternative_techniques/05_new_from_fd.t         |   27 ++++
           11 files changed, 470 insertions(+), 123 deletions(-)
 
-0.01011322 2010-12-18 23:14:03 Pacific/Auckland
+0.01011322 2010-12-18T10:14:03Z
           First version.
 
