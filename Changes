@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Minor changes release, mostly just dist maintainence.
+
  [Dependencies::Devel]
  - Advertise @Author::KENTNL
 
