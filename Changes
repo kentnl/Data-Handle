@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01011703 2011-04-24T22:29:18Z
  - Minor changes release, mostly just dist maintainence.
 
  [Dependencies::Devel]
