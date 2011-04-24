@@ -247,7 +247,8 @@ If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight li
 =cut
 
 sub stringify {
-  local $@;    # Term::ANSIColour clobbers $@
+  ## no critic ( ProhibitPunctuationVars )
+  local $@ = undef;  # Term::ANSIColour clobbers $@
   my $self       = shift;
   my $message    = $self->{message};
   my @stacklines = @{ $self->{stacklines} };

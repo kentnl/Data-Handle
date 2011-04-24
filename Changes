@@ -1,6 +1,12 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        [Packaging]
+        - Move from @KENTNL to @Author::KENTNL
+        - Use recent features of @Author::KENTNL
+
+        [Internals]
+        - Explicitly set $@ to undef ( critic )
 
 0.01011702 2010-12-22 02:43:35 Pacific/Auckland
 
