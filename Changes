@@ -12,6 +12,7 @@ Revision history for {{$dist->name}}
  - Move from @KENTNL to @Author::KENTNL
  - Use recent features of @Author::KENTNL
  - Ship .perltidyrc
+ - Changes file normalized to CPAN::Changes form.
 
  [Tests]
  - Add CPAN::Changes tests.
