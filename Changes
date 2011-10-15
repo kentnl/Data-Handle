@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01011704 2011-10-15T11:05:19Z
  [Bugs]
  - Adapted to work with latest Package::Stash ( 0.33 )
 
