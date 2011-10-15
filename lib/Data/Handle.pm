@@ -152,6 +152,7 @@ sub _has_data_symbol {
       $rval = undef;
       return;
     }
+    ## no critic (RequireCarping)
     die $_;
   };
   return $rval;
