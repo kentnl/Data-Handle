@@ -154,6 +154,7 @@ sub _has_data_symbol {
     }
     die $_;
   };
+  return $rval;
 }
 
 sub _get_data_symbol {
