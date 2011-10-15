@@ -3,7 +3,10 @@ use warnings;
 
 package Data::Handle;
 BEGIN {
-  $Data::Handle::VERSION = '0.01011703';
+  $Data::Handle::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Data::Handle::VERSION = '0.01011704';
 }
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
@@ -20,12 +23,14 @@ use Package::Stash;
 use Carp ();
 use Data::Handle::Exception;
 use Data::Handle::IO;
+use Try::Tiny;
 
 
 sub new {
   my ( $class, $targetpackage ) = @_;
 
-  _e('NoSymbol')->throw("$targetpackage has no DATA symbol") if ( !$class->_has_data_symbol($targetpackage) );
+  _e('NoSymbol')->throw("$targetpackage has no DATA symbol")
+    if ( !$class->_has_data_symbol($targetpackage) );
 
   if ( !$class->_is_valid_data_tell($targetpackage) ) {
     _e('BadFilePos')
@@ -54,16 +59,30 @@ sub new {
 
 sub _has_data_symbol {
   my ( $self, $package ) = @_;
-  my $object = Package::Stash->new($package);
-  return unless $object->has_package_symbol('DATA');
-  my $fh = $object->get_package_symbol('DATA');
-  return defined fileno *{$fh};
+  my $rval = undef;
+  try {
+    my $object = Package::Stash->new($package);
+    return unless $object->has_package_symbol('DATA');
+    my $fh = $object->get_package_symbol('DATA');
+    $rval = defined fileno *{$fh};
+  }
+  catch {
+    if ( $_ =~ /is not a module name/ ) {
+      $rval = undef;
+      return;
+    }
+    ## no critic (RequireCarping)
+    die $_;
+  };
+  return $rval;
 }
 
 sub _get_data_symbol {
   my ( $self, $package ) = @_;
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')->throw('_get_data_symbol was called when there is no data_symbol to get');
+    _e('Internal::BadGet')
+      ->throw(
+      '_get_data_symbol was called when there is no data_symbol to get');
   }
   return Package::Stash->new($package)->get_package_symbol('DATA');
 }
@@ -71,10 +90,13 @@ sub _get_data_symbol {
 sub _get_start_offset {
   my ( $self, $package ) = @_;
 
-  return $datastash{$package}->{offset} if ( exists $datastash{$package}->{offset} );
+  return $datastash{$package}->{offset}
+    if ( exists $datastash{$package}->{offset} );
 
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')->throw('_get_start_offset was called when there is no data_symbol to get');
+    _e('Internal::BadGet')
+      ->throw(
+      '_get_start_offset was called when there is no data_symbol to get');
   }
   my $fd       = $self->_get_data_symbol($package);
   my $position = tell $fd;
@@ -86,9 +108,12 @@ sub _get_start_offset {
 
 sub _is_valid_data_tell {
   my ( $self, $package ) = @_;
-  return 1 if ( exists $datastash{$package} && $datastash{$package}->{valid} == 1 );
+  return 1
+    if ( exists $datastash{$package} && $datastash{$package}->{valid} == 1 );
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')->throw('_is_valid_data_tell was called when there is no data_symbol to get');
+    _e('Internal::BadGet')
+      ->throw(
+      '_is_valid_data_tell was called when there is no data_symbol to get');
   }
 
   my $fh     = $self->_get_data_symbol($package);
@@ -150,7 +175,8 @@ sub _read {
   my ( $self, undef, $len, $offset ) = @_;
 
   ## no critic ( ProhibitMagicNumbers )
-  _e('API::Invalid::Params')->throw('_read() takes 2 or 3 parameters.') if ( scalar @_ < 3 or scalar @_ > 4 );
+  _e('API::Invalid::Params')->throw('_read() takes 2 or 3 parameters.')
+    if ( scalar @_ < 3 or scalar @_ > 4 );
 
   $self->_restore_pos();
   my $return;
@@ -166,7 +192,8 @@ sub _read {
 
 sub _getc {
   my ($self) = @_;
-  _e('API::Invalid::Params')->throw('_get() takes 0 parameters.') if scalar @_ > 1;
+  _e('API::Invalid::Params')->throw('_get() takes 0 parameters.')
+    if scalar @_ > 1;
   $self->_restore_pos();
   my $return = getc $self->_fh;
   $self->_set_pos();
@@ -178,7 +205,8 @@ sub _seek {
 
   ## no critic ( ProhibitMagicNumbers )
 
-  _e('API::Invalid::Params')->throw('_seek() takes 2 params.') if scalar @_ != 3;
+  _e('API::Invalid::Params')->throw('_seek() takes 2 params.')
+    if scalar @_ != 3;
 
   my $fh = $self->_stash->{filehandle};
 
@@ -207,7 +235,8 @@ sub _tell {
 
 sub _eof {
   my $self = shift;
-  _e('API::Invalid::Params')->throw("_eof() takes no params : @_ ") if @_ && $_[0] != 1;
+  _e('API::Invalid::Params')->throw("_eof() takes no params : @_ ")
+    if @_ && $_[0] != 1;
   $self->_restore_pos();
   return eof $self->_stash->{filehandle};
 }
@@ -222,16 +251,35 @@ sub _set_pos {
   return ( $self->_stash->{current_offset} = tell $self->_stash->{filehandle} );
 }
 
-sub _stash   { return ${ *{ $_[0] } }{stash} }
-sub _fileno  { return }
-sub _e       { return 'Data::Handle::Exception::' . shift }
-sub _fh      { return shift->_stash->{filehandle} }
-sub _binmode { return _e('API::NotImplemented')->throw('_binmode() is difficult on Data::Handle and not implemented yet.') }
-sub _open    { return _e('API::Invalid')->throw('_open() is invalid on Data::Handle.') }
-sub _close   { return _e('API::Invalid')->throw('_close() is invalid on Data::Handle') }
-sub _printf  { return _e('API::Invalid')->throw('_printf() is invalid on Data::Handle.') }
-sub _print   { return _e('API::Invalid')->throw('_print() is invalid on Data::Handle.') }
-sub _write   { return _e('API::Invalid')->throw('_write() is invalid on Data::Handle.') }
+sub _stash  { return ${ *{ $_[0] } }{stash} }
+sub _fileno { return }
+sub _e      { return 'Data::Handle::Exception::' . shift }
+sub _fh     { return shift->_stash->{filehandle} }
+
+sub _binmode {
+  return _e('API::NotImplemented')
+    ->throw('_binmode() is difficult on Data::Handle and not implemented yet.');
+}
+
+sub _open {
+  return _e('API::Invalid')->throw('_open() is invalid on Data::Handle.');
+}
+
+sub _close {
+  return _e('API::Invalid')->throw('_close() is invalid on Data::Handle');
+}
+
+sub _printf {
+  return _e('API::Invalid')->throw('_printf() is invalid on Data::Handle.');
+}
+
+sub _print {
+  return _e('API::Invalid')->throw('_print() is invalid on Data::Handle.');
+}
+
+sub _write {
+  return _e('API::Invalid')->throw('_write() is invalid on Data::Handle.');
+}
 
 
 1;
@@ -246,7 +294,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 0.01011703
+version 0.01011704
 
 =head1 SYNOPSIS
 

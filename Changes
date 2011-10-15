@@ -1,5 +1,31 @@
 Revision history for Data-Handle
 
+0.01011704 2011-10-15T11:05:19Z
+ [Bugs]
+ - Adapted to work with latest Package::Stash ( 0.33 )
+
+ [Dependencies::New]
+ - Try::Tiny
+ - strict
+ - warnings
+
+ [Dependencies::Removed]
+ - English
+
+ [Internals]
+ - AUTHORITY data now provided
+ - Versions not set in BEGIN
+ - Tidy step now only 80 chars.
+
+ [Packaging]
+ - Updated LICENSE ( Better indentation, updated address for FSF )
+ - Author/Release tests now say in xt/
+ - Github URL's now all https://
+
+ [Tests]
+ - Refactored some of the exception class testing logic in 04_ for enhanced
+   clarity.
+
 0.01011703 2011-04-24T22:29:18Z
  - Minor changes release, mostly just dist maintainence.
 

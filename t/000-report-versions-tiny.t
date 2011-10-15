@@ -52,7 +52,6 @@ eval { $v .= pmver('Carp','any version') };
 eval { $v .= pmver('Data::Dumper','any version') };
 eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL','1.0.0') };
 eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL::Lite','0.01009803') };
-eval { $v .= pmver('English','any version') };
 eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('IO::File','any version') };
@@ -64,8 +63,11 @@ eval { $v .= pmver('Symbol','any version') };
 eval { $v .= pmver('Term::ANSIColor','any version') };
 eval { $v .= pmver('Test::Fatal','any version') };
 eval { $v .= pmver('Test::More','0.96') };
+eval { $v .= pmver('Try::Tiny','any version') };
 eval { $v .= pmver('overload','any version') };
 eval { $v .= pmver('parent','any version') };
+eval { $v .= pmver('strict','any version') };
+eval { $v .= pmver('warnings','any version') };
 
 
 

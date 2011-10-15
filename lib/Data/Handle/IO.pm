@@ -4,7 +4,10 @@ use warnings;
 
 package Data::Handle::IO;
 BEGIN {
-  $Data::Handle::IO::VERSION = '0.01011703';
+  $Data::Handle::IO::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Data::Handle::IO::VERSION = '0.01011704';
 }
 
 # ABSTRACT: A Tie Package so Data::Handle can look and feel like a normal handle.
@@ -49,7 +52,7 @@ Data::Handle::IO - A Tie Package so Data::Handle can look and feel like a normal
 
 =head1 VERSION
 
-version 0.01011703
+version 0.01011704
 
 =head1 DESCRIPTION
 
