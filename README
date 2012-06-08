@@ -2,7 +2,7 @@ NAME
     Data::Handle - A Very simple interface to the __DATA__ file handle.
 
 VERSION
-    version 0.01011704
+    version 0.02001001
 
 SYNOPSIS
         package Foo;
@@ -104,7 +104,7 @@ AUTHOR
     Kent Fredric <kentnl@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+    This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

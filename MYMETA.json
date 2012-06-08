@@ -4,7 +4,7 @@
       "Kent Fredric <kentnl@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300016, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -16,23 +16,18 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Module::Build" : "0.3601"
+            "Data::Dumper" : "0",
+            "File::Find" : "0",
+            "File::Temp" : "0",
+            "IO::Handle" : "0",
+            "Module::Build" : "0.3601",
+            "Test::Fatal" : "0",
+            "Test::More" : "0.96"
          }
       },
       "configure" : {
          "requires" : {
             "Module::Build" : "0.3601"
-         }
-      },
-      "develop" : {
-         "recommends" : {
-            "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "v1.3.0"
-         },
-         "requires" : {
-            "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "0"
-         },
-         "suggests" : {
-            "Dist::Zilla::PluginBundle::Author::KENTNL" : "v1.3.0"
          }
       },
       "runtime" : {
@@ -49,16 +44,6 @@
             "perl" : "5.008",
             "strict" : "0",
             "warnings" : "0"
-         }
-      },
-      "test" : {
-         "requires" : {
-            "Data::Dumper" : "0",
-            "File::Find" : "0",
-            "File::Temp" : "0",
-            "IO::Handle" : "0",
-            "Test::Fatal" : "0",
-            "Test::More" : "0.96"
          }
       }
    },
@@ -80,9 +65,7 @@
    "resources" : {
       "homepage" : "https://github.com/kentfredric/Data-Handle",
       "repository" : {
-         "type" : "git",
-         "url" : "https://github.com/kentfredric/Data-Handle.git",
-         "web" : "https://github.com/kentfredric/Data-Handle"
+         "url" : "https://github.com/kentfredric/Data-Handle.git"
       }
    },
    "version" : "0.02001001",
@@ -112,11 +95,11 @@
       },
       "perl" : {
          "original" : "v5.16.0",
-         "qv" : 1,
+         "qv" : "1",
          "version" : [
-            5,
-            16,
-            0
+            "5",
+            "16",
+            "0"
          ]
       },
       "platform" : "linux",
@@ -414,4 +397,3 @@
    },
    "x_authority" : "cpan:KENTNL"
 }
-

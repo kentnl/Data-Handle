@@ -23,13 +23,13 @@ my %module_build_args = (
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Data-Handle",
-  "dist_version" => "0.01011704",
+  "dist_version" => "0.02001001",
   "license" => "perl",
   "module_name" => "Data::Handle",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
-    "Carp" => 0,
+    "Carp" => "1.22",
     "IO::File" => 0,
     "Package::Stash" => 0,
     "Scalar::Util" => 0,
@@ -38,6 +38,7 @@ my %module_build_args = (
     "Try::Tiny" => 0,
     "overload" => 0,
     "parent" => 0,
+    "perl" => "5.008",
     "strict" => 0,
     "warnings" => 0
   },
