@@ -1,6 +1,29 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Important Changes]
+ - Code has been purged of stolen chunks of Carp code, and now instead
+   depends on a minimum Carp of v1.22. This is the first release of Carp
+   that was packaged on CPAN as a Dual Lifed module, upon which I can rely
+   upon the existance and implementation of 'caller_info'. It is hoped this
+   will make bugs smaller and the code easier.
+
+ [Dependencies::Development::Changed]
+ - recommends : Dist::Zilla::PluginBundle::Author::KENTNL::Lite
+   0.01009803 -> v1.3.0
+ - suggests : Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0 -> v1.3.0
+
+ [Dependencies::Runtime::Changed]
+ - requires : Carp 0 -> 1.22
+
+ [Dependencies::Runtime::New]
+ - requires : perl 5.8.0
+
+ [Packaging]
+ - Update LICENSE ( Year, Address, Indent )
+
+ [Tests::New]
+ - minimum version test
 
 0.01011704 2011-10-15T11:05:19Z
  [Bugs]
