@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.02001001 2012-06-08T13:30:28Z
  [00 Important Changes]
  - Code has been purged of stolen chunks of Carp code, and now instead
    depends on a minimum Carp of v1.22. This is the first release of Carp
