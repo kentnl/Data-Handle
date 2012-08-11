@@ -1,6 +1,17 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Minor Maintenance Release.
+
+ [Dependencies::Changed]
+ - build requires : Module::Build 0.3601 -> 0.4002
+ - configure requires : Module::Build 0.3601 -> 0.4002
+ - development suggests : Dist::Zilla::PluginBundle::Author::KENTNL
+   v1.3.0 -> v1.5.0
+ - test requires : Test::More 0.96 -> 0.98
+
+ [Tests]
+ - Made tests slightly more detailed in the error condition.
 
 0.02001001 2012-06-08T13:30:28Z
  [00 Important Changes]
