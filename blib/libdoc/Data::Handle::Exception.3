@@ -132,112 +132,78 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "Data::Handle 3"
-.TH Data::Handle 3 "2012-06-09" "perl v5.16.0" "User Contributed Perl Documentation"
+.IX Title "Data::Handle::Exception 3"
+.TH Data::Handle::Exception 3 "2012-08-11" "perl v5.16.0" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-Data::Handle \- A Very simple interface to the _\|_DATA_\|_  file handle.
+Data::Handle::Exception \- Super\-light Weight Dependency Free Exception base.
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.02001001
+version 0.02001002
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
-.Vb 1
-\&    package Foo;
-\&
-\&    sub bar {
-\&        my $handle = Data::Handle\->new( _\|_PACKAGE_\|_ );
-\&        while (<$handle>) {
-\&            print $_;
-\&        }
-\&    }
-\&
-\&    _\|_DATA_\|_
-\&    Foo
+.Vb 4
+\&    use Data::Handle::Exception;
+\&    Data::Handle::Exception\->generate_exception(
+\&        \*(AqFoo::Bar\*(Aq => \*(AqA Bar error occurred :(\*(Aq
+\&    )\->throw();
 .Ve
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
-This Package serves as a very \fIvery\fR simple interface to a packages _\|_DATA_\|_ section.
+Data::Handle's primary goal is to be somewhat \*(L"Infrastructural\*(R" in design, much like Package::Stash is, being very low-level, and doing one thing, and doing it well, solving an issue with Perl's native implementation.
 .PP
-Its primary purposes is to make successive accesses viable without needing to
-scan the file manually for the _\|_DATA_\|_ marker.
+The idea is for more complex things to use this, instead of this using more complex things.
 .PP
-It does this mostly by recording the current position of the file handle on
-the first call to \f(CW\*(C`\->new\*(C'\fR, and then re-using that position on every successive \f(CW\*(C`\->new\*(C'\fR call,
-which eliminates a bit of the logic for you.
+As such, a dependency on something like Moose would be overkill, possibly even detrimental to encouraging the use of this module.
 .PP
-At present, it only does a simple heuristic ( backtracking ) to verify the current position is \fBimmediately\fR
-at the start of a _\|_DATA_\|_ section, but we may improve on this one day.
+So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a slightly nasty but reasonably straight forward exception class.
+.PP
+The actual Exception classes don't actually have their own sources, they're automatically generated when Data::Handle::Exception is loaded.
+And we have some really nice backtraces stolen from Carp's code, with some sexy coloured formatting. See L/stringify> for details.
 .SH "METHODS"
 .IX Header "METHODS"
 .SS "new"
 .IX Subsection "new"
+.Vb 2
+\&    my @stack;
+\&    my $i = Data::Handle::Exception\->new(  $messageString, \e@stack );
+.Ve
+.SS "throw"
+.IX Subsection "throw"
 .Vb 1
-\&    my $fh = Data::Handle\->new( $targetpackage )
+\&    Data::Handle::Exception\->new(  $messageString, \e@stack )\->throw();
+.Ve
+.SS "stringify"
+.IX Subsection "stringify"
+Turns this stacktrace into a string.
+.PP
+.Vb 1
+\&    $exception\->stringify();
+\&
+\&    my $str = "hello " . $exception . " world";
 .Ve
 .PP
-Where \f(CW$targetpackage\fR is the package you want the _\|_DATA_\|_ section from.
-.SH "WARNING"
-.IX Header "WARNING"
-At present, this module does you no favours if something else earlier has moved the file handle position past
-the _\|_DATA_\|_ section, or rewound it to the start of the file. This is an understood caveat, but nothing else
-seems to have a good way around this either. ( You can always rewind to the start of the file and use heuristics, but that is rather pesky ).
-.PP
-Hopefully, if other people \fBdo\fR decide to go moving your file pointer, they'll use this module to do it so
-you your code doesn't break.
-.SH "USAGE"
-.IX Header "USAGE"
-\&\f(CW\*(C`Data::Handle\-\*(C'\fR\fInew()\fR> returns a tied file-handle, and for all intents and purposes, it should
-behave as if somebody had copied _\|_DATA_\|_ to its own file, and then done \f(CW\*(C`open $fh, \*(Aq<\*(Aq , $file\*(C'\fR
-on it, for every instance of the Data::Handle.
-.PP
-It also inherits from IO::File, so all the methods it has that make sense to use should probably work
-on this too,  i.e.:
-.PP
-.Vb 2
-\&    my $handle = Data::Handle\->new( _\|_PACKAGE_\|_ );
-\&    my @lines = $handle\->getlines();
-.Ve
-.PP
-Also, all offsets are proxied in transit, so you can treat the file-handle as if byte 0 is the first byte of the data section.
-.PP
-.Vb 5
-\&    my $handle = Data::Handle\->new( _\|_PACKAGE_\|_ );
-\&    my @lines = $handle\->getlines();
-\&    seek $handle, 0, 0;
-\&    local $/ = undef;
-\&    my $line = scalar <$handle>; # SLURPED!
-.Ve
-.PP
-Also, the current position of each handle instance is internally tracked, so you can have as many
-objects pointing to the same _\|_DATA_\|_ section but have their read mechanism uninterrupted by any others.
-.PP
-.Vb 2
-\&    my $handlea  = Data::Handle\->new( _\|_PACKAGE_\|_ );
-\&    my $handleb  = Data::Handle\->new( _\|_PACKAGE_\|_ );
-\&
-\&    seek $handlea, 10, 0;
-\&    seek $handleb, 15, 0;
-\&
-\&    read $handlea, my $buf, 5;
-\&
-\&    read $handleb, my $bufa, 1;
-\&    read $handleb, my $bufb, 1;
-\&
-\&     $bufa eq $bufb;
-.Ve
-.PP
-Don't be fooled, it does this under the covers by a lot of \f(CW\*(C`seek\*(C'\fR/\f(CW\*(C`tell\*(C'\fR magic, but they shouldn't be a problem unless you are truly anal over speed.
-.SH "CREDITS"
-.IX Header "CREDITS"
-Thanks to LeoNerd and anno, from #perl on irc.freenode.org,
-they were most helpful in helping me grok the magic of \f(CW\*(C`tie\*(C'\fR that
-makes the simplicity of the interface possible.
-.PP
-Thanks to Chas Owens and James Wright for their efforts with trying to get something simpler with \fIfdup()\fRing the descriptor ( Sadly not working yet ).
+If you have a coloured terminal, then Term::ANSIColor is used to highlight lines based on how likely they are to be relevant to diagnosis.
+.ie n .IP "Green \- From Data::Handle and is likely to be ""safe"", its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere." 4
+.el .IP "Green \- From Data::Handle and is likely to be ``safe'', its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere." 4
+.IX Item "Green - From Data::Handle and is likely to be safe, its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere."
+.PD 0
+.IP "Yellow \- Sources we're confident its unlikely to be a source of problems, currently" 4
+.IX Item "Yellow - Sources we're confident its unlikely to be a source of problems, currently"
+.RS 4
+.IP "Try::Tiny" 4
+.IX Item "Try::Tiny"
+.IP "Test::Fatal" 4
+.IX Item "Test::Fatal"
+.RE
+.RS 4
+.RE
+.IP "White \- Everything Else, the place the problem is most likely to be." 4
+.IX Item "White - Everything Else, the place the problem is most likely to be."
+.PD
 .SH "AUTHOR"
 .IX Header "AUTHOR"
 Kent Fredric <kentnl@cpan.org>

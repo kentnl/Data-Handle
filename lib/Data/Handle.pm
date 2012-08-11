@@ -6,7 +6,7 @@ BEGIN {
   $Data::Handle::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Data::Handle::VERSION = '0.02001001';
+  $Data::Handle::VERSION = '0.02001002';
 }
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
@@ -294,7 +294,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 0.02001001
+version 0.02001002
 
 =head1 SYNOPSIS
 

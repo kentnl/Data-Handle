@@ -6,7 +6,7 @@ BEGIN {
   $Data::Handle::Exception::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Data::Handle::Exception::VERSION = '0.02001001';
+  $Data::Handle::Exception::VERSION = '0.02001002';
 }
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
@@ -159,7 +159,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.02001001
+version 0.02001002
 
 =head1 SYNOPSIS
 

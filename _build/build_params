@@ -17,7 +17,7 @@ do{ my $x = [
          'recommends' => {},
          'pod_files' => undef,
          'config_dir' => '_build',
-         'dist_version' => '0.02001001',
+         'dist_version' => '0.02001002',
          'sign' => undef,
          'recurse_into' => [],
          'build_bat' => 0,
@@ -29,12 +29,12 @@ do{ my $x = [
                                     'conflicts',
                                     'recommends'
                                   ],
-         'base_dir' => '/home/kent/perl/Data-Handle/Data-Handle-0.02001001',
+         'base_dir' => '/home/kent/perl/Data-Handle/Data-Handle-0.02001002',
          'allow_mb_mismatch' => 0,
          'xs_files' => undef,
          'destdir' => undef,
          'metafile' => 'META.yml',
-         'mb_version' => '0.4',
+         'mb_version' => '0.4002',
          'use_tap_harness' => 0,
          'test_file_exts' => [
                                '.t'
@@ -48,14 +48,14 @@ do{ my $x = [
                             'blib/lib',
                             'blib/arch'
                           ],
-         'perl' => '/usr/bin/perl5.16.0',
+         'perl' => '/home/kent/perl5/perlbrew/perls/perl-5.16.0/bin/perl5.16.0',
          'dist_author' => [
                             'Kent Fredric <kentnl@cpan.org>'
                           ],
          'bundle_inc' => [],
          'use_rcfile' => 1,
          'configure_requires' => {
-                                   'Module::Build' => '0.3601'
+                                   'Module::Build' => '0.4002'
                                  },
          'test_files' => undef,
          'dist_abstract' => 'A Very simple interface to the __DATA__  file handle.',
@@ -66,11 +66,7 @@ do{ my $x = [
          'meta_merge' => {},
          'get_options' => {},
          'dist_version_from' => undef,
-         '_added_to_INC' => [
-                              '/home/kent/.perl/lib/perl5/x86_64-linux-thread-multi',
-                              '/home/kent/.perl/lib/perl5',
-                              '/home/kent/.perl/lib/perl5/x86_64-linux'
-                            ],
+         '_added_to_INC' => [],
          'auto_configure_requires' => 1,
          'create_license' => undef,
          'debugger' => undef,
@@ -89,7 +85,7 @@ do{ my $x = [
                              ],
          'release_status' => 'stable',
          'needs_compiler' => '',
-         'orig_dir' => '/home/kent/perl/Data-Handle/Data-Handle-0.02001001',
+         'orig_dir' => '/home/kent/perl/Data-Handle/Data-Handle-0.02001002',
          'include_dirs' => [],
          'installdirs' => 'site',
          'mymetafile' => 'MYMETA.yml',
@@ -127,13 +123,13 @@ do{ my $x = [
          'autosplit' => undef,
          'license' => 'perl',
          'build_requires' => {
-                               'Test::More' => '0.96',
+                               'Test::More' => '0.98',
                                'File::Find' => 0,
                                'IO::Handle' => 0,
                                'File::Temp' => 0,
                                'Data::Dumper' => 0,
                                'Test::Fatal' => 0,
-                               'Module::Build' => '0.3601'
+                               'Module::Build' => '0.4002'
                              },
          'config' => undef,
          'blib' => 'blib',
