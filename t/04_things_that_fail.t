@@ -15,6 +15,20 @@ sub checkisa {
   $id++;
   subtest "checkisa $id" => sub {
     note explain \@types;
+    if ( not defined $exception ) {
+      my $fail = fail(sprintf 'checkisa(\$exception, %s ) didn\'t receive anything useful' , explain(@types));
+      diag(explain({ exception => $exception }));
+      return $fail;
+    } else {
+      pass("Exception is defined");
+    }
+    if ( not ref $exception ) {
+      my $fail = fail(sprintf 'checkisa($exception, %s ) didn\'t receive a ref' , explain(@types));
+      diag(explain({ exception => $exception }));
+      return $fail;
+    } else {
+      pass(sprintf q[Exception is a ref ( %s ) ], ref $exception );
+    }
 
     for my $type (@types) {
       $needdiag = 1
