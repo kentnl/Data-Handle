@@ -6,7 +6,7 @@ BEGIN {
   $Data::Handle::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Data::Handle::VERSION = '0.02001002';
+  $Data::Handle::VERSION = '0.02001003';
 }
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
@@ -284,8 +284,8 @@ sub _write {
 
 1;
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -294,7 +294,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 0.02001002
+version 0.02001003
 
 =head1 SYNOPSIS
 
@@ -393,10 +393,9 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
