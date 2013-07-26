@@ -25,7 +25,7 @@ my %module_build_args = (
   "requires" => {
     "Carp" => "1.22",
     "IO::File" => 0,
-    "Package::Stash" => 0,
+    "Package::Stash" => "0.15",
     "Scalar::Util" => 0,
     "Symbol" => 0,
     "Term::ANSIColor" => 0,
@@ -43,7 +43,8 @@ my %module_build_args = (
     "File::Temp" => 0,
     "IO::Handle" => 0,
     "Test::Fatal" => 0,
-    "Test::More" => "0.98"
+    "Test::More" => "0.98",
+    "lib" => 0
   }
 );
 

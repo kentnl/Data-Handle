@@ -19,7 +19,7 @@ my %datastash;
 use Symbol qw( gensym );
 use Scalar::Util qw( weaken );
 use parent qw( IO::File );
-use Package::Stash;
+use Package::Stash 0.15; # has_symbol
 use Carp ();
 use Data::Handle::Exception;
 use Data::Handle::IO;
@@ -62,8 +62,8 @@ sub _has_data_symbol {
   my $rval = undef;
   try {
     my $object = Package::Stash->new($package);
-    return unless $object->has_package_symbol('DATA');
-    my $fh = $object->get_package_symbol('DATA');
+    return unless $object->has_symbol('DATA');
+    my $fh = $object->get_symbol('DATA');
     $rval = defined fileno *{$fh};
   }
   catch {
@@ -84,7 +84,7 @@ sub _get_data_symbol {
       ->throw(
       '_get_data_symbol was called when there is no data_symbol to get');
   }
-  return Package::Stash->new($package)->get_package_symbol('DATA');
+  return Package::Stash->new($package)->get_symbol('DATA');
 }
 
 sub _get_start_offset {
