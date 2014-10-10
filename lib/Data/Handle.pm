@@ -102,7 +102,7 @@ use Package::Stash 0.15;    # has_symbol
 use Carp ();
 use Data::Handle::Exception;
 use Data::Handle::IO;
-use Try::Tiny;
+use Try::Tiny qw( try catch );
 
 =method new
 
@@ -144,12 +144,12 @@ sub new {
 }
 
 sub _has_data_symbol {
-  my ( $self, $package ) = @_;
+  my ( undef, $package ) = @_;
   my $rval = undef;
   try {
-    my $object = Package::Stash->new($package);
-    return unless $object->has_symbol('DATA');
-    my $fh = $object->get_symbol('DATA');
+    my $stash = Package::Stash->new($package);
+    return unless $stash->has_symbol('DATA');
+    my $fh = $stash->get_symbol('DATA');
     $rval = defined fileno *{$fh};
   }
   catch {
@@ -220,7 +220,7 @@ sub _is_valid_data_tell {
 }
 
 sub _stringify_metadata {
-  my ( $self, $package ) = @_;
+  my ( undef, $package ) = @_;
   my @lines = ();
   if ( not exists $datastash{$package} ) {
     push @lines, "Nothing known about $package\n";

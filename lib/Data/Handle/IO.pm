@@ -26,9 +26,9 @@ You're not really supposed to use this package Directly though.
 =cut
 
 sub TIEHANDLE {
-  my $self   = shift;
-  my $object = shift;
-  return bless $object, $self;
+  my $self          = shift;
+  my $handle_object = shift;
+  return bless $handle_object, $self;
 }
 
 sub _object {

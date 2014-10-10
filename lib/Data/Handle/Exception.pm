@@ -38,7 +38,7 @@ And we have some really nice backtraces stolen from Carp's code, with some sexy 
 use overload '""' => \&stringify;
 use Scalar::Util qw( blessed );
 use Carp 1.22;
-use Term::ANSIColor qw( :constants );
+use Term::ANSIColor qw( YELLOW GREEN RESET );
 
 if ( not defined &Carp::caller_info ) {
   Carp::croak(
@@ -179,7 +179,7 @@ sub stringify {
 my $dynaexceptions = { 'Data::Handle::Exception' => 1 };
 
 sub _gen {
-  my ( $self, $fullclass, $parent ) = @_;
+  my ( undef, $fullclass, $parent ) = @_;
   ## no critic ( RequireInterpolationOfMetachars )
   my $code = sprintf q{package %s; our @ISA=("%s"); 1;}, $fullclass, $parent;
 
