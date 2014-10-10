@@ -102,7 +102,7 @@ use Package::Stash 0.15;    # has_symbol
 use Carp ();
 use Data::Handle::Exception;
 use Data::Handle::IO;
-use Try::Tiny;
+use Try::Tiny qw( try catch );
 
 
 

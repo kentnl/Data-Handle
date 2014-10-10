@@ -38,7 +38,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use overload '""' => \&stringify;
 use Scalar::Util qw( blessed );
 use Carp 1.22;
-use Term::ANSIColor qw( :constants );
+use Term::ANSIColor qw( YELLOW GREEN RESET );
 
 if ( not defined &Carp::caller_info ) {
   Carp::croak(
