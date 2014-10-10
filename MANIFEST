@@ -15,10 +15,12 @@ dist.ini.meta
 lib/Data/Handle.pm
 lib/Data/Handle/Exception.pm
 lib/Data/Handle/IO.pm
+maint/perlcritic.rc.gen.pl
 misc/Changes.deps
 misc/Changes.deps.all
 misc/Changes.deps.dev
 misc/Changes.deps.opt
+misc/perlcritic.deps
 perlcritic.rc
 t/00-compile/lib_Data_Handle_Exception_pm.t
 t/00-compile/lib_Data_Handle_IO_pm.t
