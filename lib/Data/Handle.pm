@@ -153,7 +153,7 @@ sub _has_data_symbol {
     $rval = defined fileno *{$fh};
   }
   catch {
-    if ( $_ =~ /is not a module name/ ) {
+    if (/is not a module name/) {
       $rval = undef;
       return;
     }
