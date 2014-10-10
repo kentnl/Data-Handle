@@ -7,6 +7,7 @@ This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and 
  - Dist::Zilla::Plugin::Authority 1.006
  - Dist::Zilla::Plugin::AutoPrereqs
  - Dist::Zilla::Plugin::ConfirmRelease
+ - Dist::Zilla::Plugin::CopyFilesFromBuild
  - Dist::Zilla::Plugin::EOLTests
  - Dist::Zilla::Plugin::Git::Check
  - Dist::Zilla::Plugin::Git::Commit
