@@ -27,8 +27,8 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 sub TIEHANDLE {
   my $self   = shift;
-  my $object = shift;
-  return bless $object, $self;
+  my $handle_object = shift;
+  return bless $handle_object, $self;
 }
 
 sub _object {

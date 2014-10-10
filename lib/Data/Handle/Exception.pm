@@ -179,7 +179,7 @@ sub stringify {
 my $dynaexceptions = { 'Data::Handle::Exception' => 1 };
 
 sub _gen {
-  my ( $self, $fullclass, $parent ) = @_;
+  my ( undef, $fullclass, $parent ) = @_;
   ## no critic ( RequireInterpolationOfMetachars )
   my $code = sprintf q{package %s; our @ISA=("%s"); 1;}, $fullclass, $parent;
 
