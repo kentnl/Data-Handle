@@ -90,14 +90,12 @@ sub throw {
 
     my %i = $callerinfo->($i);
 
-    push @stack,      \%i;
-    push @stacklines, sprintf q{Exception '%s' thrown at %s line %s%s},
-      blessed($self), $i{file}, $i{line}, $tid_msg;
+    push @stack, \%i;
+    push @stacklines, sprintf q{Exception '%s' thrown at %s line %s%s}, blessed($self), $i{file}, $i{line}, $tid_msg;
 
     while ( my %j = $callerinfo->( ++$i ) ) {
       push @stack, \%j;
-      push @stacklines, sprintf q{%s called at %s line %s%s}, $j{sub_name},
-        $j{file}, $j{line}, $tid_msg;
+      push @stacklines, sprintf q{%s called at %s line %s%s}, $j{sub_name}, $j{file}, $j{line}, $tid_msg;
     }
   }
   $self->{message}    = $message;
@@ -207,10 +205,7 @@ sub _gen_tree {
   return $class;
 }
 
-for (
-  qw( API::Invalid API::Invalid::Whence API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos )
-  )
-{
+for ( qw( API::Invalid API::Invalid::Whence API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos ) ) {
   __PACKAGE__->_gen_tree("Data::Handle::Exception::$_");
 }
 
