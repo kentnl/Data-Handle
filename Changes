@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.000000 2014-10-10T13:04:03Z 3f54592
  [00 Major - Version Scheme Change]
  - Migrate to using x.yyyzzz (mantissa=6) instead of x.yyyzzzaa (mantissa=8)
  - This may affect hand-operated downstreams
