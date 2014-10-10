@@ -43,9 +43,9 @@ requires:
   strict: '0'
   warnings: '0'
 resources:
-  bugtracker: https://github.com/kentfredric/Data-Handle/issues
-  homepage: https://github.com/kentfredric/Data-Handle
-  repository: https://github.com/kentfredric/Data-Handle.git
+  bugtracker: https://github.com/kentnl/Data-Handle/issues
+  homepage: https://github.com/kentnl/Data-Handle
+  repository: https://github.com/kentnl/Data-Handle.git
 version: '1.000000'
 x_BuiltWith:
   modules:

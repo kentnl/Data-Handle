@@ -132,13 +132,13 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/kentfredric/Data-Handle/issues"
+         "web" : "https://github.com/kentnl/Data-Handle/issues"
       },
-      "homepage" : "https://github.com/kentfredric/Data-Handle",
+      "homepage" : "https://github.com/kentnl/Data-Handle",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/kentfredric/Data-Handle.git",
-         "web" : "https://github.com/kentfredric/Data-Handle"
+         "url" : "https://github.com/kentnl/Data-Handle.git",
+         "web" : "https://github.com/kentnl/Data-Handle"
       }
    },
    "version" : "1.000000",
