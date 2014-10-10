@@ -71,7 +71,11 @@ is(
   'Dual Reading lives'
 );
 
-is( $left,            $right,            'Left and Right dual-read outputs are the same' );
-is( tell $leftreader, tell $rightreader, 'Left and right dual-read are at the same position after reading' );
+is( $left, $right, 'Left and Right dual-read outputs are the same' );
+is(
+  tell $leftreader,
+  tell $rightreader,
+  'Left and right dual-read are at the same position after reading'
+);
 
 done_testing;

@@ -1,3 +1,4 @@
+use 5.006;
 use strict;
 use warnings;
 
@@ -40,10 +41,10 @@ use Carp 1.22;
 use Term::ANSIColor qw( :constants );
 
 if ( not defined &Carp::caller_info ) {
-  Carp::croak(q{Cannot load Data::Handle::Exception as your version of Carp does not have ::caller_info which we use for backtraces, Carp Version: } .
-    $Carp::VERSION );
+  Carp::croak(
+q{Cannot load Data::Handle::Exception as your version of Carp does not have ::caller_info which we use for backtraces, Carp Version: }
+      . $Carp::VERSION );
 }
-
 
 
 
@@ -58,7 +59,6 @@ sub new {
   bless $self, $class;
   return $self;
 }
-
 
 
 
@@ -90,12 +90,14 @@ sub throw {
 
     my %i = $callerinfo->($i);
 
-    push @stack, \%i;
-    push @stacklines, sprintf q{Exception '%s' thrown at %s line %s%s}, blessed($self), $i{file}, $i{line}, $tid_msg;
+    push @stack,      \%i;
+    push @stacklines, sprintf q{Exception '%s' thrown at %s line %s%s},
+      blessed($self), $i{file}, $i{line}, $tid_msg;
 
     while ( my %j = $callerinfo->( ++$i ) ) {
       push @stack, \%j;
-      push @stacklines, sprintf q{%s called at %s line %s%s}, $j{sub_name}, $j{file}, $j{line}, $tid_msg;
+      push @stacklines, sprintf q{%s called at %s line %s%s}, $j{sub_name},
+        $j{file}, $j{line}, $tid_msg;
     }
   }
   $self->{message}    = $message;
@@ -161,7 +163,7 @@ sub throw {
 
 sub stringify {
   ## no critic ( ProhibitPunctuationVars )
-  local $@ = undef;  # Term::ANSIColour clobbers $@
+  local $@ = undef;    # Term::ANSIColour clobbers $@
   my $self       = shift;
   my $message    = $self->{message};
   my @stacklines = @{ $self->{stacklines} };
@@ -205,7 +207,10 @@ sub _gen_tree {
   return $class;
 }
 
-for (qw( API::Invalid API::Invalid::Whence API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos )) {
+for (
+  qw( API::Invalid API::Invalid::Whence API::Invalid::Params API::NotImplemented Internal::BadGet NoSymbol BadFilePos )
+  )
+{
   __PACKAGE__->_gen_tree("Data::Handle::Exception::$_");
 }
 

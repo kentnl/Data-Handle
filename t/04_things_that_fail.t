@@ -10,24 +10,30 @@ my $id = 0;
 
 sub checkisa {
   my ( $exception, @types ) = @_;
-  my ( @caller ) = caller();
+  my (@caller) = caller();
   my $needdiag = 0;
   $id++;
   subtest "checkisa $id" => sub {
     note explain \@types;
     if ( not defined $exception ) {
-      my $fail = fail(sprintf 'checkisa(\$exception, %s ) didn\'t receive anything useful' , explain(@types));
-      diag(explain({ exception => $exception }));
+      my $fail = fail(
+        sprintf 'checkisa(\$exception, %s ) didn\'t receive anything useful',
+        explain(@types) );
+      diag( explain( { exception => $exception } ) );
       return $fail;
-    } else {
+    }
+    else {
       pass("Exception is defined");
     }
     if ( not ref $exception ) {
-      my $fail = fail(sprintf 'checkisa($exception, %s ) didn\'t receive a ref' , explain(@types));
-      diag(explain({ exception => $exception }));
+      my $fail =
+        fail( sprintf 'checkisa($exception, %s ) didn\'t receive a ref',
+        explain(@types) );
+      diag( explain( { exception => $exception } ) );
       return $fail;
-    } else {
-      pass(sprintf q[Exception is a ref ( %s ) ], ref $exception );
+    }
+    else {
+      pass( sprintf q[Exception is a ref ( %s ) ], ref $exception );
     }
 
     for my $type (@types) {
@@ -35,7 +41,7 @@ sub checkisa {
         unless isa_ok( $exception, $type, 'Expected Exception Type ' . $type );
     }
     diag($exception) if $needdiag;
-    note(explain(\@caller)) if $needdiag;
+    note( explain( \@caller ) ) if $needdiag;
   };
 }
 

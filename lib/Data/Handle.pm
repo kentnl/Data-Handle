@@ -1,3 +1,4 @@
+use 5.006;
 use strict;
 use warnings;
 
@@ -97,7 +98,7 @@ my %datastash;
 use Symbol qw( gensym );
 use Scalar::Util qw( weaken );
 use parent qw( IO::File );
-use Package::Stash 0.15; # has_symbol
+use Package::Stash 0.15;    # has_symbol
 use Carp ();
 use Data::Handle::Exception;
 use Data::Handle::IO;

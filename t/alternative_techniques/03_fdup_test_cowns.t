@@ -2,7 +2,8 @@
 use strict;
 use warnings;
 
-use Test::More 0.96 skip_all => 'Example alternative technique that doesn\'t work';
+use Test::More 0.96 skip_all =>
+  'Example alternative technique that doesn\'t work';
 
 use lib "t/lib/";
 use Data;

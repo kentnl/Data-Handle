@@ -57,10 +57,10 @@ is(
 
     seek $data, 0, 0;
 
-    _diag( '::getc style>');
+    _diag('::getc style>');
 
-    while( !eof( $data ) ){
-        _diag( getc $data  );
+    while ( !eof($data) ) {
+      _diag( getc $data );
     }
 
     seek $data, 0, 0;
@@ -71,10 +71,9 @@ is(
 
     read $data, $buffer, 5, -2;
 
-    _diag( $buffer );
+    _diag($buffer);
 
-    fileno $data;  # its undef :(
-
+    fileno $data;    # its undef :(
 
   },
   undef,
