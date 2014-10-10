@@ -1,6 +1,6 @@
 ﻿Revision history for Data-Handle
 
-1.000000 2014-10-10T10:44:18Z e36cbce
+1.000000 2014-10-10T10:45:13Z ad51a67
  [00 Major - Version Scheme Change]
  - Migrate to using x.yyyzzz (mantissa=6) instead of x.yyyzzzaa (mantissa=8)
  - This may affect hand-operated downstreams
