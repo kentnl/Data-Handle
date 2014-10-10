@@ -98,7 +98,7 @@ my %datastash;
 use Symbol qw( gensym );
 use Scalar::Util qw( weaken );
 use parent qw( IO::File );
-use Package::Stash 0.15; # has_symbol
+use Package::Stash 0.15;    # has_symbol
 use Carp ();
 use Data::Handle::Exception;
 use Data::Handle::IO;
@@ -166,9 +166,7 @@ sub _has_data_symbol {
 sub _get_data_symbol {
   my ( $self, $package ) = @_;
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')
-      ->throw(
-      '_get_data_symbol was called when there is no data_symbol to get');
+    _e('Internal::BadGet')->throw('_get_data_symbol was called when there is no data_symbol to get');
   }
   return Package::Stash->new($package)->get_symbol('DATA');
 }
@@ -180,9 +178,7 @@ sub _get_start_offset {
     if ( exists $datastash{$package}->{offset} );
 
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')
-      ->throw(
-      '_get_start_offset was called when there is no data_symbol to get');
+    _e('Internal::BadGet')->throw('_get_start_offset was called when there is no data_symbol to get');
   }
   my $fd       = $self->_get_data_symbol($package);
   my $position = tell $fd;
@@ -197,9 +193,7 @@ sub _is_valid_data_tell {
   return 1
     if ( exists $datastash{$package} && $datastash{$package}->{valid} == 1 );
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')
-      ->throw(
-      '_is_valid_data_tell was called when there is no data_symbol to get');
+    _e('Internal::BadGet')->throw('_is_valid_data_tell was called when there is no data_symbol to get');
   }
 
   my $fh     = $self->_get_data_symbol($package);
@@ -343,8 +337,7 @@ sub _e      { return 'Data::Handle::Exception::' . shift }
 sub _fh     { return shift->_stash->{filehandle} }
 
 sub _binmode {
-  return _e('API::NotImplemented')
-    ->throw('_binmode() is difficult on Data::Handle and not implemented yet.');
+  return _e('API::NotImplemented')->throw('_binmode() is difficult on Data::Handle and not implemented yet.');
 }
 
 sub _open {

@@ -10,24 +10,26 @@ my $id = 0;
 
 sub checkisa {
   my ( $exception, @types ) = @_;
-  my ( @caller ) = caller();
+  my (@caller) = caller();
   my $needdiag = 0;
   $id++;
   subtest "checkisa $id" => sub {
     note explain \@types;
     if ( not defined $exception ) {
-      my $fail = fail(sprintf 'checkisa(\$exception, %s ) didn\'t receive anything useful' , explain(@types));
-      diag(explain({ exception => $exception }));
+      my $fail = fail( sprintf 'checkisa(\$exception, %s ) didn\'t receive anything useful', explain(@types) );
+      diag( explain( { exception => $exception } ) );
       return $fail;
-    } else {
+    }
+    else {
       pass("Exception is defined");
     }
     if ( not ref $exception ) {
-      my $fail = fail(sprintf 'checkisa($exception, %s ) didn\'t receive a ref' , explain(@types));
-      diag(explain({ exception => $exception }));
+      my $fail = fail( sprintf 'checkisa($exception, %s ) didn\'t receive a ref', explain(@types) );
+      diag( explain( { exception => $exception } ) );
       return $fail;
-    } else {
-      pass(sprintf q[Exception is a ref ( %s ) ], ref $exception );
+    }
+    else {
+      pass( sprintf q[Exception is a ref ( %s ) ], ref $exception );
     }
 
     for my $type (@types) {
@@ -35,7 +37,7 @@ sub checkisa {
         unless isa_ok( $exception, $type, 'Expected Exception Type ' . $type );
     }
     diag($exception) if $needdiag;
-    note(explain(\@caller)) if $needdiag;
+    note( explain( \@caller ) ) if $needdiag;
   };
 }
 
@@ -52,14 +54,7 @@ isnt(
   '_get_data_symbol Fails if DATA is not there'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::Internal::BadGet',
-    'Data::Handle::Exception::Internal',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::Internal::BadGet', 'Data::Handle::Exception::Internal', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -69,14 +64,7 @@ isnt(
   '_get_start_offset Fails if DATA is not there.'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::Internal::BadGet',
-    'Data::Handle::Exception::Internal',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::Internal::BadGet', 'Data::Handle::Exception::Internal', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -86,14 +74,7 @@ isnt(
   '_is_valid_data_tell Fails if DATA is not there.'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::Internal::BadGet',
-    'Data::Handle::Exception::Internal',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::Internal::BadGet', 'Data::Handle::Exception::Internal', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -106,10 +87,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Params',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Params', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -123,10 +102,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Params',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Params', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -141,10 +118,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Params',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Params', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -159,10 +134,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Params',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Params', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -177,10 +150,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Params',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Params', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -195,10 +166,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Whence',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Whence', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -213,10 +182,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Params',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Params', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -231,10 +198,8 @@ isnt(
 checkisa(
   $e,
   (
-    'Data::Handle::Exception::API::Invalid::Params',
-    'Data::Handle::Exception::API::Invalid',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
+    'Data::Handle::Exception::API::Invalid::Params', 'Data::Handle::Exception::API::Invalid',
+    'Data::Handle::Exception::API',                  'Data::Handle::Exception',
   )
 );
 
@@ -246,14 +211,7 @@ isnt(
   '_binmode Fails.'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::API::NotImplemented',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::API::NotImplemented', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 
 for my $meth (qw( _open _close _printf _print _write )) {
   isnt(
@@ -266,13 +224,7 @@ for my $meth (qw( _open _close _printf _print _write )) {
     $meth . ' Fails'
   );
 
-  checkisa(
-    $e,
-    (
-      'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API',
-      'Data::Handle::Exception',
-    )
-  );
+  checkisa( $e, ( 'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 }
 
 isnt(
@@ -284,13 +236,7 @@ isnt(
   'syswrite $instance Fails'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -301,13 +247,7 @@ isnt(
   'print { $instance } Fails'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -318,13 +258,7 @@ isnt(
   'printf { $instance } Fails'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -335,13 +269,7 @@ isnt(
   'close $instance Fails'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -352,14 +280,7 @@ isnt(
   'binmode $instance Fails'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::API::NotImplemented',
-    'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::API::NotImplemented', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 
 isnt(
   $e = exception {
@@ -371,12 +292,6 @@ isnt(
   'open $instance Fails'
 );
 
-checkisa(
-  $e,
-  (
-    'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API',
-    'Data::Handle::Exception',
-  )
-);
+checkisa( $e, ( 'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
 
 done_testing;

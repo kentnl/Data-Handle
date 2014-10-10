@@ -41,8 +41,9 @@ use Carp 1.22;
 use Term::ANSIColor qw( :constants );
 
 if ( not defined &Carp::caller_info ) {
-  Carp::croak(q{Cannot load Data::Handle::Exception as your version of Carp does not have ::caller_info which we use for backtraces, Carp Version: } .
-    $Carp::VERSION );
+  Carp::croak(
+q{Cannot load Data::Handle::Exception as your version of Carp does not have ::caller_info which we use for backtraces, Carp Version: }
+      . $Carp::VERSION );
 }
 
 =method new
@@ -52,14 +53,12 @@ if ( not defined &Carp::caller_info ) {
 
 =cut
 
-
 sub new {
   my ($class) = @_;
   my $self = {};
   bless $self, $class;
   return $self;
 }
-
 
 =method throw
 
@@ -162,7 +161,7 @@ If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight li
 
 sub stringify {
   ## no critic ( ProhibitPunctuationVars )
-  local $@ = undef;  # Term::ANSIColour clobbers $@
+  local $@ = undef;    # Term::ANSIColour clobbers $@
   my $self       = shift;
   my $message    = $self->{message};
   my @stacklines = @{ $self->{stacklines} };
