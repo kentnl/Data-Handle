@@ -44,7 +44,7 @@ use Scalar::Util qw( blessed );
 use Carp 1.22;
 use Term::ANSIColor qw( YELLOW GREEN RESET );
 
-if ( not defined &Carp::caller_info ) {
+if ( not defined &Carp::caller_info ) { ## no critic (Subroutines)
   Carp::croak(<<"EOF");
 Cannot load Data::Handle::Exception as your version of Carp does not have
  ::caller_info which we use for backtraces.
