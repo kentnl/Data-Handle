@@ -44,7 +44,7 @@ use Scalar::Util qw( blessed );
 use Carp 1.22;
 use Term::ANSIColor qw( YELLOW GREEN RESET );
 
-if ( not defined &Carp::caller_info ) { ## no critic (Subroutines)
+if ( not defined &Carp::caller_info ) {    ## no critic (Subroutines)
   Carp::croak(<<"EOF");
 Cannot load Data::Handle::Exception as your version of Carp does not have
  ::caller_info which we use for backtraces.
@@ -84,12 +84,14 @@ sub throw {
   my @stacklines = ();
 
   # This is mostly because want to benefit from all new fixes in carp.
-  my $callerinfo = \&Carp::caller_info;
-  {    # stolen parts  from Carp::ret_backtrace
+  my $callerinfo = \&Carp::caller_info;    ## no critic (Subroutines)
+
+  {                                        # stolen parts  from Carp::ret_backtrace
     my ($i) = 0;
 
     my $tid_msg = q{};
-    if ( defined &threads::tid ) {
+    if ( defined &threads::tid ) {         ## no critic (Subroutines)
+
       my $tid = threads->tid;
       $tid_msg = " thread $tid" if $tid;
     }
