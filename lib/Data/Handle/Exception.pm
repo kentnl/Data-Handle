@@ -211,6 +211,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Data::Handle::Exception - Super-light Weight Dependency Free Exception base.

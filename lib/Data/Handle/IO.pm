@@ -55,6 +55,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Data::Handle::IO - A Tie Package so Data::Handle can look and feel like a normal handle.

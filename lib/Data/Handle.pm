@@ -378,6 +378,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Data::Handle - A Very simple interface to the __DATA__  file handle.
