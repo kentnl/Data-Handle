@@ -2,14 +2,31 @@ use strict;
 use warnings;
 
 package Data::Handle::Exception;
-BEGIN {
-  $Data::Handle::Exception::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Data::Handle::Exception::VERSION = '0.02001003';
-}
-
+$Data::Handle::Exception::VERSION = '0.02001004';
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -25,12 +42,23 @@ if ( not defined &Carp::caller_info ) {
 
 
 
+
+
+
+
+
+
 sub new {
   my ($class) = @_;
   my $self = {};
   bless $self, $class;
   return $self;
 }
+
+
+
+
+
 
 
 
@@ -97,6 +125,36 @@ sub throw {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 sub stringify {
   ## no critic ( ProhibitPunctuationVars )
   local $@ = undef;  # Term::ANSIColour clobbers $@
@@ -159,7 +217,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.02001003
+version 0.02001004
 
 =head1 SYNOPSIS
 
@@ -226,7 +284,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -3,15 +3,23 @@ use strict;
 use warnings;
 
 package Data::Handle::IO;
-BEGIN {
-  $Data::Handle::IO::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Data::Handle::IO::VERSION = '0.02001003';
-}
-
+$Data::Handle::IO::VERSION = '0.02001004';
 # ABSTRACT: A Tie Package so Data::Handle can look and feel like a normal handle.
 #
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 sub TIEHANDLE {
@@ -53,7 +61,7 @@ Data::Handle::IO - A Tie Package so Data::Handle can look and feel like a normal
 
 =head1 VERSION
 
-version 0.02001003
+version 0.02001004
 
 =head1 DESCRIPTION
 
@@ -74,7 +82,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
