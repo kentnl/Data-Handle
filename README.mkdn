@@ -4,7 +4,7 @@ Data::Handle - A Very simple interface to the \_\_DATA\_\_  file handle.
 
 # VERSION
 
-version 0.02001003
+version 0.02001004
 
 # SYNOPSIS
 
@@ -31,7 +31,7 @@ It does this mostly by recording the current position of the file handle on
 the first call to `->new`, and then re-using that position on every successive `->new` call,
 which eliminates a bit of the logic for you.
 
-At present, it only does a simple heuristic ( backtracking ) to verify the current position is __immediately__
+At present, it only does a simple heuristic ( backtracking ) to verify the current position is **immediately**
 at the start of a \_\_DATA\_\_ section, but we may improve on this one day.
 
 # METHODS
@@ -48,7 +48,7 @@ At present, this module does you no favours if something else earlier has moved 
 the \_\_DATA\_\_ section, or rewound it to the start of the file. This is an understood caveat, but nothing else
 seems to have a good way around this either. ( You can always rewind to the start of the file and use heuristics, but that is rather pesky ).
 
-Hopefully, if other people __do__ decide to go moving your file pointer, they'll use this module to do it so
+Hopefully, if other people **do** decide to go moving your file pointer, they'll use this module to do it so
 you your code doesn't break.
 
 # USAGE
@@ -57,7 +57,7 @@ you your code doesn't break.
 behave as if somebody had copied \_\_DATA\_\_ to its own file, and then done `open $fh, '<' , $file`
 on it, for every instance of the Data::Handle.
 
-It also inherits from [IO::File](http://search.cpan.org/perldoc?IO::File), so all the methods it has that make sense to use should probably work
+It also inherits from [IO::File](https://metacpan.org/pod/IO::File), so all the methods it has that make sense to use should probably work
 on this too,  i.e.:
 
     my $handle = Data::Handle->new( __PACKAGE__ );
@@ -91,7 +91,7 @@ Don't be fooled, it does this under the covers by a lot of `seek`/`tell` magic, 
 
 # CREDITS
 
-Thanks to LeoNerd and anno, from \#perl on irc.freenode.org,
+Thanks to LeoNerd and anno, from #perl on irc.freenode.org,
 they were most helpful in helping me grok the magic of `tie` that
 makes the simplicity of the interface possible.
 
@@ -103,7 +103,7 @@ Kent Fredric <kentnl@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
