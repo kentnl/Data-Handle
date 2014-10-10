@@ -1,11 +1,11 @@
 ﻿Revision history for Data-Handle
 
-0.02001004 2014-10-10T10:21:17Z 7da311b
+0.02001004 2014-10-10T10:24:31Z 43a52a7
  [Dependencies::Stats]
  - Dependencies changed since 0.02001003, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
- - develop: +48 -2 (recommends: -1, suggests: +1 -1)
+ - develop: +47 -2 (recommends: -1, suggests: +1 ↑1)
  - test: +2 ↑1 -2 (recommends: +1)
 
 0.02001003 2013-07-26T09:11:29Z

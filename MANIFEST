@@ -9,6 +9,7 @@ META.json
 META.yml
 README
 dist.ini
+dist.ini.meta
 lib/Data/Handle.pm
 lib/Data/Handle/Exception.pm
 lib/Data/Handle/IO.pm
