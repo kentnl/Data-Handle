@@ -1,4 +1,4 @@
-use 5.006;
+use 5.008;    # _use_carp_version
 use strict;
 use warnings;
 
