@@ -1,27 +1,61 @@
+use 5.008;    # _use_carp_version
 use strict;
 use warnings;
 
 package Data::Handle::Exception;
-BEGIN {
-  $Data::Handle::Exception::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Data::Handle::Exception::VERSION = '0.02001003';
-}
+
+our $VERSION = '1.000000';
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 use overload '""' => \&stringify;
 use Scalar::Util qw( blessed );
 use Carp 1.22;
-use Term::ANSIColor qw( :constants );
+use Term::ANSIColor qw( YELLOW GREEN RESET );
 
-if ( not defined &Carp::caller_info ) {
-  Carp::croak(q{Cannot load Data::Handle::Exception as your version of Carp does not have ::caller_info which we use for backtraces, Carp Version: } .
-    $Carp::VERSION );
+if ( not defined &Carp::caller_info ) {    ## no critic (Subroutines)
+  Carp::croak(<<"EOF");
+Cannot load Data::Handle::Exception as your version of Carp does not have
+ ::caller_info which we use for backtraces.
+Carp Version: $Carp::VERSION
+EOF
 }
+
+
+
+
+
 
 
 
@@ -31,6 +65,10 @@ sub new {
   bless $self, $class;
   return $self;
 }
+
+
+
+
 
 
 
@@ -46,12 +84,14 @@ sub throw {
   my @stacklines = ();
 
   # This is mostly because want to benefit from all new fixes in carp.
-  my $callerinfo = \&Carp::caller_info;
-  {    # stolen parts  from Carp::ret_backtrace
+  my $callerinfo = \&Carp::caller_info;    ## no critic (Subroutines)
+
+  {                                        # stolen parts  from Carp::ret_backtrace
     my ($i) = 0;
 
     my $tid_msg = q{};
-    if ( defined &threads::tid ) {
+    if ( defined &threads::tid ) {         ## no critic (Subroutines)
+
       my $tid = threads->tid;
       $tid_msg = " thread $tid" if $tid;
     }
@@ -97,9 +137,41 @@ sub throw {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 sub stringify {
   ## no critic ( ProhibitPunctuationVars )
-  local $@ = undef;  # Term::ANSIColour clobbers $@
+  local $@ = undef;    # Term::ANSIColour clobbers $@
   my $self       = shift;
   my $message    = $self->{message};
   my @stacklines = @{ $self->{stacklines} };
@@ -117,7 +189,7 @@ sub stringify {
 my $dynaexceptions = { 'Data::Handle::Exception' => 1 };
 
 sub _gen {
-  my ( $self, $fullclass, $parent ) = @_;
+  my ( undef, $fullclass, $parent ) = @_;
   ## no critic ( RequireInterpolationOfMetachars )
   my $code = sprintf q{package %s; our @ISA=("%s"); 1;}, $fullclass, $parent;
 
@@ -153,13 +225,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.02001003
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -170,16 +244,20 @@ version 0.02001003
 
 =head1 DESCRIPTION
 
-L<Data::Handle>'s primary goal is to be somewhat "Infrastructural" in design, much like L<Package::Stash> is, being very low-level, and doing one thing, and doing it well, solving an issue with Perl's native implementation.
+L<Data::Handle>'s primary goal is to be somewhat "Infrastructural" in design, much like L<Package::Stash> is, being very
+low-level, and doing one thing, and doing it well, solving an issue with Perl's native implementation.
 
 The idea is for more complex things to use this, instead of this using more complex things.
 
 As such, a dependency on something like Moose would be overkill, possibly even detrimental to encouraging the use of this module.
 
-So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a slightly nasty but reasonably straight forward exception class.
+So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies,
+so this module is a slightly nasty but reasonably straight forward exception class.
 
-The actual Exception classes don't actually have their own sources, they're automatically generated when L<Data::Handle::Exception> is loaded.
-And we have some really nice backtraces stolen from Carp's code, with some sexy coloured formatting. See L/stringify> for details.
+The actual Exception classes don't actually have their own sources, they're automatically generated when
+C<Data::Handle::Exception> is loaded.
+And we have some really nice backtraces stolen from Carp's code, with some sexy colored formatting. See L</stringify> for
+details.
 
 =head1 METHODS
 
@@ -200,11 +278,13 @@ Turns this stacktrace into a string.
 
     my $str = "hello " . $exception . " world";
 
-If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant to diagnosis.
+If you have a colored terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant
+to diagnosis.
 
 =over 4
 
-=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere.
+=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from,
+so its useful information, but the problem is probably elsewhere.
 
 =item Yellow - Sources we're confident its unlikely to be a source of problems, currently
 
@@ -226,7 +306,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

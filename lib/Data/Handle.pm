@@ -1,15 +1,94 @@
+use 5.006;
 use strict;
 use warnings;
 
 package Data::Handle;
-BEGIN {
-  $Data::Handle::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Data::Handle::VERSION = '0.02001003';
-}
+
+our $VERSION = '1.000000';
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -19,11 +98,18 @@ my %datastash;
 use Symbol qw( gensym );
 use Scalar::Util qw( weaken );
 use parent qw( IO::File );
-use Package::Stash 0.15; # has_symbol
+use Package::Stash 0.15;    # has_symbol
 use Carp ();
 use Data::Handle::Exception;
 use Data::Handle::IO;
-use Try::Tiny;
+use Try::Tiny qw( try catch );
+
+
+
+
+
+
+
 
 
 sub new {
@@ -58,16 +144,16 @@ sub new {
 }
 
 sub _has_data_symbol {
-  my ( $self, $package ) = @_;
+  my ( undef, $package ) = @_;
   my $rval = undef;
   try {
-    my $object = Package::Stash->new($package);
-    return unless $object->has_symbol('DATA');
-    my $fh = $object->get_symbol('DATA');
+    my $stash = Package::Stash->new($package);
+    return unless $stash->has_symbol('DATA');
+    my $fh = $stash->get_symbol('DATA');
     $rval = defined fileno *{$fh};
   }
   catch {
-    if ( $_ =~ /is not a module name/ ) {
+    if (/is not a module name/) {
       $rval = undef;
       return;
     }
@@ -80,9 +166,7 @@ sub _has_data_symbol {
 sub _get_data_symbol {
   my ( $self, $package ) = @_;
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')
-      ->throw(
-      '_get_data_symbol was called when there is no data_symbol to get');
+    _e('Internal::BadGet')->throw('_get_data_symbol was called when there is no data_symbol to get');
   }
   return Package::Stash->new($package)->get_symbol('DATA');
 }
@@ -94,9 +178,7 @@ sub _get_start_offset {
     if ( exists $datastash{$package}->{offset} );
 
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')
-      ->throw(
-      '_get_start_offset was called when there is no data_symbol to get');
+    _e('Internal::BadGet')->throw('_get_start_offset was called when there is no data_symbol to get');
   }
   my $fd       = $self->_get_data_symbol($package);
   my $position = tell $fd;
@@ -109,11 +191,9 @@ sub _get_start_offset {
 sub _is_valid_data_tell {
   my ( $self, $package ) = @_;
   return 1
-    if ( exists $datastash{$package} && $datastash{$package}->{valid} == 1 );
+    if ( exists $datastash{$package} && 1 == $datastash{$package}->{valid} );
   if ( !$self->_has_data_symbol($package) ) {
-    _e('Internal::BadGet')
-      ->throw(
-      '_is_valid_data_tell was called when there is no data_symbol to get');
+    _e('Internal::BadGet')->throw('_is_valid_data_tell was called when there is no data_symbol to get');
   }
 
   my $fh     = $self->_get_data_symbol($package);
@@ -140,7 +220,7 @@ sub _is_valid_data_tell {
 }
 
 sub _stringify_metadata {
-  my ( $self, $package ) = @_;
+  my ( undef, $package ) = @_;
   my @lines = ();
   if ( not exists $datastash{$package} ) {
     push @lines, "Nothing known about $package\n";
@@ -210,14 +290,14 @@ sub _seek {
 
   my $fh = $self->_stash->{filehandle};
 
-  if ( $whence == 0 ) {
+  if ( 0 == $whence ) {
     $position = $self->_stash->{start_offset} + $position;
   }
-  elsif ( $whence == 1 ) {
+  elsif ( 1 == $whence ) {
     $whence   = 0;
     $position = $self->_stash->{current_offset} + $position;
   }
-  elsif ( $whence == 2 ) {
+  elsif ( 2 == $whence ) {
   }
   else {
     _e('API::Invalid::Whence')->throw('Expected whence values are 0,1,2');
@@ -257,8 +337,7 @@ sub _e      { return 'Data::Handle::Exception::' . shift }
 sub _fh     { return shift->_stash->{filehandle} }
 
 sub _binmode {
-  return _e('API::NotImplemented')
-    ->throw('_binmode() is difficult on Data::Handle and not implemented yet.');
+  return _e('API::NotImplemented')->throw('_binmode() is difficult on Data::Handle and not implemented yet.');
 }
 
 sub _open {
@@ -282,11 +361,22 @@ sub _write {
 }
 
 
+
+
+
+
+
+
+
+
+
 1;
 
 __END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -294,7 +384,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 0.02001003
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -334,7 +424,7 @@ Where C<$targetpackage> is the package you want the __DATA__ section from.
 
 =head1 WARNING
 
-At present, this module does you no favours if something else earlier has moved the file handle position past
+At present, this module does you no favors if something else earlier has moved the file handle position past
 the __DATA__ section, or rewound it to the start of the file. This is an understood caveat, but nothing else
 seems to have a good way around this either. ( You can always rewind to the start of the file and use heuristics, but that is rather pesky ).
 
@@ -393,7 +483,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

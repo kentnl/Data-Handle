@@ -1,23 +1,34 @@
-
+use 5.006;
 use strict;
 use warnings;
 
 package Data::Handle::IO;
-BEGIN {
-  $Data::Handle::IO::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Data::Handle::IO::VERSION = '0.02001003';
-}
+
+our $VERSION = '1.000000';
 
 # ABSTRACT: A Tie Package so Data::Handle can look and feel like a normal handle.
-#
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 sub TIEHANDLE {
-  my $self   = shift;
-  my $object = shift;
-  return bless $object, $self;
+  my $self          = shift;
+  my $handle_object = shift;
+  return bless $handle_object, $self;
 }
 
 sub _object {
@@ -47,13 +58,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Data::Handle::IO - A Tie Package so Data::Handle can look and feel like a normal handle.
 
 =head1 VERSION
 
-version 0.02001003
+version 1.000000
 
 =head1 DESCRIPTION
 
@@ -74,7 +87,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
