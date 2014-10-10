@@ -268,7 +268,7 @@ If you have a colored terminal, then L<Term::ANSIColor> is used to highlight lin
 
 =over 4
 
-=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere.
+=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful information, but the problem is probably elsewhere.
 
 =item Yellow - Sources we're confident its unlikely to be a source of problems, currently
 
