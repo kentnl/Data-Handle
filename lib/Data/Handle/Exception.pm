@@ -2,8 +2,12 @@ use strict;
 use warnings;
 
 package Data::Handle::Exception;
-$Data::Handle::Exception::VERSION = '0.02001004';
+
+our $VERSION = '1.000000';
+
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
@@ -219,7 +223,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 0.02001004
+version 1.000000
 
 =head1 SYNOPSIS
 

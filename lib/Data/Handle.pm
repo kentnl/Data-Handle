@@ -2,8 +2,12 @@ use strict;
 use warnings;
 
 package Data::Handle;
-$Data::Handle::VERSION = '0.02001004';
+
+our $VERSION = '1.000000';
+
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
@@ -386,7 +390,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 0.02001004
+version 1.000000
 
 =head1 SYNOPSIS
 

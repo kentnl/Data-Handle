@@ -3,9 +3,12 @@ use strict;
 use warnings;
 
 package Data::Handle::IO;
-$Data::Handle::IO::VERSION = '0.02001004';
+
+our $VERSION = '1.000000';
+
 # ABSTRACT: A Tie Package so Data::Handle can look and feel like a normal handle.
-#
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
@@ -63,7 +66,7 @@ Data::Handle::IO - A Tie Package so Data::Handle can look and feel like a normal
 
 =head1 VERSION
 
-version 0.02001004
+version 1.000000
 
 =head1 DESCRIPTION
 
