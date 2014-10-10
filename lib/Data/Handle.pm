@@ -424,7 +424,7 @@ Where C<$targetpackage> is the package you want the __DATA__ section from.
 
 =head1 WARNING
 
-At present, this module does you no favours if something else earlier has moved the file handle position past
+At present, this module does you no favors if something else earlier has moved the file handle position past
 the __DATA__ section, or rewound it to the start of the file. This is an understood caveat, but nothing else
 seems to have a good way around this either. ( You can always rewind to the start of the file and use heuristics, but that is rather pesky ).
 
