@@ -21,16 +21,20 @@ our $VERSION = '1.000000';
 
 =head1 DESCRIPTION
 
-L<Data::Handle>'s primary goal is to be somewhat "Infrastructural" in design, much like L<Package::Stash> is, being very low-level, and doing one thing, and doing it well, solving an issue with Perl's native implementation.
+L<Data::Handle>'s primary goal is to be somewhat "Infrastructural" in design, much like L<Package::Stash> is, being very
+low-level, and doing one thing, and doing it well, solving an issue with Perl's native implementation.
 
 The idea is for more complex things to use this, instead of this using more complex things.
 
 As such, a dependency on something like Moose would be overkill, possibly even detrimental to encouraging the use of this module.
 
-So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a slightly nasty but reasonably straight forward exception class.
+So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies,
+so this module is a slightly nasty but reasonably straight forward exception class.
 
-The actual Exception classes don't actually have their own sources, they're automatically generated when C<Data::Handle::Exception> is loaded.
-And we have some really nice backtraces stolen from Carp's code, with some sexy colored formatting. See L</stringify> for details.
+The actual Exception classes don't actually have their own sources, they're automatically generated when
+C<Data::Handle::Exception> is loaded.
+And we have some really nice backtraces stolen from Carp's code, with some sexy colored formatting. See L</stringify> for
+details.
 
 
 =cut
@@ -41,9 +45,11 @@ use Carp 1.22;
 use Term::ANSIColor qw( YELLOW GREEN RESET );
 
 if ( not defined &Carp::caller_info ) {
-  Carp::croak(
-q{Cannot load Data::Handle::Exception as your version of Carp does not have ::caller_info which we use for backtraces, Carp Version: }
-      . $Carp::VERSION );
+  Carp::croak(<<"EOF");
+Cannot load Data::Handle::Exception as your version of Carp does not have
+ ::caller_info which we use for backtraces.
+Carp Version: $Carp::VERSION
+EOF
 }
 
 =method new
@@ -136,11 +142,13 @@ Turns this stacktrace into a string.
 
     my $str = "hello " . $exception . " world";
 
-If you have a colored terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant to diagnosis.
+If you have a colored terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant
+to diagnosis.
 
 =over 4
 
-=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful information, but the problem is probably elsewhere.
+=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from,
+so its useful information, but the problem is probably elsewhere.
 
 =item Yellow - Sources we're confident its unlikely to be a source of problems, currently
 
