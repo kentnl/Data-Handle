@@ -30,7 +30,7 @@ As such, a dependency on something like Moose would be overkill, possibly even d
 So we've scrimped and gone really cheap ( for now at least ) in a few places to skip adding downstream dependencies, so this module is a slightly nasty but reasonably straight forward exception class.
 
 The actual Exception classes don't actually have their own sources, they're automatically generated when L<Data::Handle::Exception> is loaded.
-And we have some really nice backtraces stolen from Carp's code, with some sexy coloured formatting. See L/stringify> for details.
+And we have some really nice backtraces stolen from Carp's code, with some sexy colored formatting. See L</stringify> for details.
 
 
 =cut
@@ -136,11 +136,11 @@ Turns this stacktrace into a string.
 
     my $str = "hello " . $exception . " world";
 
-If you have a coloured terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant to diagnosis.
+If you have a colored terminal, then L<Term::ANSIColor> is used to highlight lines based on how likely they are to be relevant to diagnosis.
 
 =over 4
 
-=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful informationally, but the problem is probably elsewhere.
+=item Green - From Data::Handle and is likely to be "safe", its where the error is being reported from, so its useful information, but the problem is probably elsewhere.
 
 =item Yellow - Sources we're confident its unlikely to be a source of problems, currently
 
