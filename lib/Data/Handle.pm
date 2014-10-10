@@ -191,7 +191,7 @@ sub _get_start_offset {
 sub _is_valid_data_tell {
   my ( $self, $package ) = @_;
   return 1
-    if ( exists $datastash{$package} && $datastash{$package}->{valid} == 1 );
+    if ( exists $datastash{$package} && 1 == $datastash{$package}->{valid} );
   if ( !$self->_has_data_symbol($package) ) {
     _e('Internal::BadGet')->throw('_is_valid_data_tell was called when there is no data_symbol to get');
   }
@@ -290,14 +290,14 @@ sub _seek {
 
   my $fh = $self->_stash->{filehandle};
 
-  if ( $whence == 0 ) {
+  if ( 0 == $whence ) {
     $position = $self->_stash->{start_offset} + $position;
   }
-  elsif ( $whence == 1 ) {
+  elsif ( 1 == $whence ) {
     $whence   = 0;
     $position = $self->_stash->{current_offset} + $position;
   }
-  elsif ( $whence == 2 ) {
+  elsif ( 2 == $whence ) {
   }
   else {
     _e('API::Invalid::Whence')->throw('Expected whence values are 0,1,2');
