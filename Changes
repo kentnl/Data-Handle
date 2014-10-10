@@ -1,6 +1,6 @@
 ﻿Revision history for Data-Handle
 
-0.02001004 2014-10-10T10:26:53Z 36a0b81
+0.02001004 2014-10-10T10:27:32Z 795fac0
  [Dependencies::Stats]
  - Dependencies changed since 0.02001003, see misc/*.deps* for details
  - build: ↑1
