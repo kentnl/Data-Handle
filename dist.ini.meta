@@ -10,8 +10,9 @@ copyright_holder = Kent Fredric <kentnl@cpan.org>
 
 
 [@Author::KENTNL]
-git_versions = 1
-mantissa = 8
+bumpversions = 1
+normal_form = numify
+mantissa = 6
 copyfiles = LICENSE
 srcreadme = mkdn
 toolkit          = eumm

@@ -4,7 +4,7 @@ Data::Handle - A Very simple interface to the \_\_DATA\_\_  file handle.
 
 # VERSION
 
-version 0.02001004
+version 1.000000
 
 # SYNOPSIS
 

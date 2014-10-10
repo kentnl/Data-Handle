@@ -1,6 +1,11 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Major - Version Scheme Change]
+ - Migrate to using x.yyyzzz (mantissa=6) instead of x.yyyzzzaa (mantissa=8)
+ - This may affect hand-operated downstreams
+ - https://questhub.io/realm/perl/quest/5388d3a9bbd0be2224000129
+
  [01 Major - Toolkit Change]
  - Migrate from using Module::Build to using ExtUtils::MakeMaker as installer toolkit
  - Make test/toolkit "latest" dependencies merely recommendations.

@@ -3,7 +3,11 @@ use warnings;
 
 package Data::Handle::Exception;
 
+our $VERSION = '1.000000';
+
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
+
+# AUTHORITY
 
 =head1 SYNOPSIS
 
