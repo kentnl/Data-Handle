@@ -4,7 +4,7 @@ use warnings;
 
 package Data::Handle::IO;
 
-our $VERSION = '1.000000';
+our $VERSION = '1.000001';
 
 # ABSTRACT: A Tie Package so Data::Handle can look and feel like a normal handle.
 
@@ -66,7 +66,7 @@ Data::Handle::IO - A Tie Package so Data::Handle can look and feel like a normal
 
 =head1 VERSION
 
-version 1.000000
+version 1.000001
 
 =head1 DESCRIPTION
 

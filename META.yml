@@ -22,13 +22,13 @@ name: Data-Handle
 provides:
   Data::Handle:
     file: lib/Data/Handle.pm
-    version: '1.000000'
+    version: '1.000001'
   Data::Handle::Exception:
     file: lib/Data/Handle/Exception.pm
-    version: '1.000000'
+    version: '1.000001'
   Data::Handle::IO:
     file: lib/Data/Handle/IO.pm
-    version: '1.000000'
+    version: '1.000001'
 requires:
   Carp: '1.22'
   IO::File: '0'
@@ -46,7 +46,7 @@ resources:
   bugtracker: https://github.com/kentnl/Data-Handle/issues
   homepage: https://github.com/kentnl/Data-Handle
   repository: https://github.com/kentnl/Data-Handle.git
-version: '1.000000'
+version: '1.000001'
 x_BuiltWith:
   modules:
     CPAN::Meta: '2.142690'
@@ -477,7 +477,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: '0'
-          tag: 1.000000-source
+          tag: 1.000001-source
           tag_format: '%v-source'
           tag_message: v%v
           time_zone: local
@@ -531,7 +531,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: releases
           signed: '0'
-          tag: '1.000000'
+          tag: '1.000001'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local

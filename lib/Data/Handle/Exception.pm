@@ -4,7 +4,7 @@ use warnings;
 
 package Data::Handle::Exception;
 
-our $VERSION = '1.000000';
+our $VERSION = '1.000001';
 
 # ABSTRACT: Super-light Weight Dependency Free Exception base.
 
@@ -233,7 +233,7 @@ Data::Handle::Exception - Super-light Weight Dependency Free Exception base.
 
 =head1 VERSION
 
-version 1.000000
+version 1.000001
 
 =head1 SYNOPSIS
 

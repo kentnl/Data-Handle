@@ -4,7 +4,7 @@ use warnings;
 
 package Data::Handle;
 
-our $VERSION = '1.000000';
+our $VERSION = '1.000001';
 
 # ABSTRACT: A Very simple interface to the __DATA__  file handle.
 
@@ -384,7 +384,7 @@ Data::Handle - A Very simple interface to the __DATA__  file handle.
 
 =head1 VERSION
 
-version 1.000000
+version 1.000001
 
 =head1 SYNOPSIS
 
