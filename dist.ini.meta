@@ -14,6 +14,8 @@ git_versions = 1
 mantissa = 8
 copyfiles = LICENSE
 srcreadme = mkdn
+toolkit          = eumm
+toolkit_hardness = soft
 ;version_major     = 0
 ;version_minor     = 1
 ; the following data denotes when this minor was minted

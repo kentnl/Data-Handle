@@ -1,6 +1,12 @@
 ﻿Revision history for Data-Handle
 
-0.02001004 2014-10-10T10:27:32Z 795fac0
+0.02001004 2014-10-10T10:28:40Z b538c30
+
+ [01 Major - Toolkit Change]
+ - Migrate from using Module::Build to using ExtUtils::MakeMaker as installer toolkit
+ - Make test/toolkit "latest" dependencies merely recommendations.
+ - https://questhub.io/realm/perl/quest/5388cc12bbd0be5b2500011f
+
  [Dependencies::Stats]
  - Dependencies changed since 0.02001003, see misc/*.deps* for details
  - build: ↑1
