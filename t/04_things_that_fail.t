@@ -1,24 +1,29 @@
 use strict;
 use warnings;
 
-use Test::More 0.96;
+use Test::More tests => 146;
 
 use Test::Fatal;
 use Data::Handle;
 
 my $id = 0;
+our $numfails = 0;
 
 sub checkisa {
   my ( $exception, @types ) = @_;
   my (@caller) = caller();
   my $needdiag = 0;
+  local $numfails = 0;
   $id++;
-  subtest "checkisa $id" => sub {
-    note explain \@types;
+  note "(fake) subtest: checkisa $id ---- ";
+  note explain \@types;
+CHECKISA_FC: {
+
     if ( not defined $exception ) {
       my $fail = fail( sprintf 'checkisa(\$exception, %s ) didn\'t receive anything useful', explain(@types) );
       diag( explain( { exception => $exception } ) );
-      return $fail;
+      $numfails++;
+      last CHECKISA_FC;
     }
     else {
       pass("Exception is defined");
@@ -26,19 +31,22 @@ sub checkisa {
     if ( not ref $exception ) {
       my $fail = fail( sprintf 'checkisa($exception, %s ) didn\'t receive a ref', explain(@types) );
       diag( explain( { exception => $exception } ) );
-      return $fail;
+      $numfails++;
+      last CHECKISA_FC;
     }
     else {
       pass( sprintf q[Exception is a ref ( %s ) ], ref $exception );
     }
 
     for my $type (@types) {
-      $needdiag = 1
+      ( $needdiag++, $numfails++ )
         unless isa_ok( $exception, $type, 'Expected Exception Type ' . $type );
     }
-    diag($exception) if $needdiag;
-    note( explain( \@caller ) ) if $needdiag;
-  };
+  }
+  diag($exception) if $needdiag;
+  note( explain( \@caller ) ) if $needdiag;
+  note "end (fake) subtest: checkisa $id ---";
+  return 0 == $numfails;
 }
 
 use lib 't/lib';
@@ -293,5 +301,3 @@ isnt(
 );
 
 checkisa( $e, ( 'Data::Handle::Exception::API::Invalid', 'Data::Handle::Exception::API', 'Data::Handle::Exception', ) );
-
-done_testing;

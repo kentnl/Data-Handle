@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More 0.96;
+use Test::More tests => 3;
 
 use Test::Fatal;
 use Data::Handle;
@@ -24,5 +24,3 @@ isnt(
 
 isa_ok( $e, 'Data::Handle::Exception::BadFilePos', 'Expected Exception Type' );
 isa_ok( $e, 'Data::Handle::Exception',             'Expected Exception Type' );
-
-done_testing;

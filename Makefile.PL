@@ -35,7 +35,7 @@ my %WriteMakefileArgs = (
     "File::Spec" => 0,
     "IO::Handle" => 0,
     "Test::Fatal" => 0,
-    "Test::More" => "0.96",
+    "Test::More" => 0,
     "lib" => 0
   },
   "VERSION" => "1.000001",
@@ -57,7 +57,7 @@ my %FallbackPrereqs = (
   "Symbol" => 0,
   "Term::ANSIColor" => 0,
   "Test::Fatal" => 0,
-  "Test::More" => "0.96",
+  "Test::More" => 0,
   "Try::Tiny" => 0,
   "lib" => 0,
   "overload" => 0,
