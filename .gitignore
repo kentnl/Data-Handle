@@ -1,2 +1,3 @@
-Data-Handle*
-.build
+/Data-Handle-*
+/.build
+/tmp/
