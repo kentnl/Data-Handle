@@ -1,5 +1,7 @@
 Revision history for Data-Handle
 
+1.000002 2017-03-08T11:45:07Z ded6738
+
 1.000001 2017-03-08T11:07:34Z 18a81a7
  - Bugfix: Avoid test failures on -Ddefault_inc_excludes_dot
  - Lower Test::More requirements
