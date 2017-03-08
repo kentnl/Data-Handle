@@ -1,6 +1,6 @@
 Revision history for Data-Handle
 
-1.000001 2017-03-08T10:46:59Z d9532b7
+1.000001 2017-03-08T11:07:17Z 60bb451
  - Bugfix: Avoid test failures on -Ddefault_inc_excludes_dot
 
  [Dependencies::Stats]

@@ -21,7 +21,6 @@ my @files = (
     't/04_things_that_fail.t',
     't/alternative_techniques/03_fdup_test.t',
     't/alternative_techniques/03_fdup_test_cowns.t',
-    't/alternative_techniques/03_fdup_test_cowns.t_out',
     't/alternative_techniques/04_fopen.t',
     't/alternative_techniques/05_new_from_fd.t',
     't/lib/Data.pm',
