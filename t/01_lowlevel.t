@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Test::More 0.96;
+use Test::More tests => 8;
 
 use Test::Fatal;
 use Data::Handle;
@@ -73,5 +73,3 @@ is(
 
 is( $left,            $right,            'Left and Right dual-read outputs are the same' );
 is( tell $leftreader, tell $rightreader, 'Left and right dual-read are at the same position after reading' );
-
-done_testing;
