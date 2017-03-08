@@ -1,6 +1,8 @@
-﻿Revision history for {{$dist->name}}
+Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.000001 2017-03-08T11:07:34Z 18a81a7
  - Bugfix: Avoid test failures on -Ddefault_inc_excludes_dot
  - Lower Test::More requirements
 
